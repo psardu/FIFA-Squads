@@ -631,10 +631,10 @@ body:has(#Uzbekistan_info:target) .overlay-Uzbekistan { display:flex; }
 /* ── HOME INFO OVERLAY ── */
 .overlay { display:none; position:fixed; inset:0; z-index:300; background:rgba(0,0,0,0.75); align-items:center; justify-content:center; padding:32px 24px; }
 body:has(#home_info:target) #home-overlay { display:flex; }
-.overlay-box { background:#000A2E; border:1.5px solid #C9A84C; border-radius:14px; padding:24px 20px 20px; max-width:340px; width:100%; }
-.overlay-title { font-size:11px; font-weight:700; color:#C9A84C; letter-spacing:2px; text-transform:uppercase; margin-bottom:12px; }
+.overlay-box { background:#000A2E; border:1.5px solid #C9A84C; border-radius:14px; padding:24px 20px 20px; max-width:340px; width:100%; position:relative; }
+.overlay-title { font-size:15px; font-weight:900; color:#C9A84C; letter-spacing:2px; text-transform:uppercase; margin-bottom:12px; text-align:center; }
 .overlay-text { font-size:13px; color:rgba(255,255,255,0.75); line-height:1.6; }
-.overlay-close { display:block; margin-top:18px; text-align:center; font-size:11px; font-style:italic; color:rgba(255,255,255,0.4); text-decoration:none; border:1px solid rgba(255,255,255,0.15); border-radius:20px; padding:5px 0; }
+.overlay-close { position:absolute; top:12px; right:14px; font-size:22px; font-weight:700; color:rgba(255,255,255,0.6); text-decoration:none; line-height:1; padding:2px 6px; }
 
 /* ── HOME GRID ── */
 .hint { text-align:center; font-size:10px; color:rgba(201,168,76,0.8); letter-spacing:2px; text-transform:uppercase; padding:10px 0 8px; }
@@ -748,6 +748,26 @@ body:has(#Uzbekistan_info:target) .overlay-Uzbekistan { display:flex; }
 
 #home-content { padding-top: 310px; }
 footer { text-align:center; padding:20px 16px 32px; font-size:10px; color:rgba(255,255,255,0.15); border-top:1px solid rgba(255,255,255,0.05); letter-spacing:1px; text-transform:uppercase; }
+
+/* ── Home sort toggle ── */
+.home-view-az  { display:block; }
+.home-view-grp { display:none; }
+body:has(#home_grp:target) .home-view-az  { display:none; }
+body:has(#home_grp:target) .home-view-grp { display:block; }
+body:has(#home_az:target)  .home-view-az  { display:block; }
+body:has(#home_az:target)  .home-view-grp { display:none; }
+/* Home sort pill active/inactive states */
+.home-sort-btn-az  { color:#C9A84C; border-color:rgba(201,168,76,0.55); font-weight:700; }
+.home-sort-btn-grp { color:rgba(255,255,255,0.35); border-color:rgba(255,255,255,0.15); font-weight:400; }
+body:has(#home_grp:target) .home-sort-btn-az  { color:rgba(255,255,255,0.35); border-color:rgba(255,255,255,0.15); font-weight:400; }
+body:has(#home_grp:target) .home-sort-btn-grp { color:#C9A84C; border-color:rgba(201,168,76,0.55); font-weight:700; }
+body:has(#home_az:target)  .home-sort-btn-az  { color:#C9A84C; border-color:rgba(201,168,76,0.55); font-weight:700; }
+body:has(#home_az:target)  .home-sort-btn-grp { color:rgba(255,255,255,0.35); border-color:rgba(255,255,255,0.15); font-weight:400; }
+/* ── By Groups layout ── */
+.grid-groups  { padding:0 10px 48px; max-width:420px; margin:0 auto; }
+.group-block  { margin-bottom:28px; }
+.group-label  { font-size:12px; font-weight:700; color:rgba(201,168,76,0.675); letter-spacing:3px; text-transform:uppercase; text-align:center; margin:0 0 12px; padding-bottom:6px; border-bottom:1px solid rgba(201,168,76,0.2); }
+.group-2x2    { display:grid; grid-template-columns:1fr 1fr; gap:22px 0; justify-items:center; width:84%; margin:0 auto; }
 </style>
 </head>
 <body>
@@ -807,10 +827,11 @@ footer { text-align:center; padding:20px 16px 32px; font-size:10px; color:rgba(2
 <div class="overlay-box">
 <div class="overlay-title">About This Data</div>
 <div class="overlay-text">Squads are as per the first announced squads - they could change based on injuries or other reasons. Data is sourced from World Soccer, Wikipedia and various internet sites, and should reflect status upto June 1st, 2026</div>
-<a class="overlay-close" href="#home_top">Tap to close</a>
+<a class="overlay-close" href="#home_top">&#x2715;</a>
 </div>
 </div>
 <!-- ══ HOME PAGE ══ -->
+<span id="home_az"></span><span id="home_grp"></span>
 <div id="home">
 <div id="home-header">
 <div class="eyebrow">Un-Official Squad Guide</div>
@@ -825,10 +846,10 @@ footer { text-align:center; padding:20px 16px 32px; font-size:10px; color:rgba(2
 <div class="stat"><div class="stat-n">1,252</div><div class="stat-l">Players</div></div>
 <div class="stat"><div class="stat-n">453</div><div class="stat-l">Clubs</div></div>
 </div>
-<p class="hint" style="margin:10px 0 0; padding:0;">Tap a nation to view its squad</p>
+<div style="display:flex;justify-content:center;gap:8px;margin:10px 0 0;padding:0;"><a class="pill home-sort-btn-az" href="#home_az">A &#x2192; Z</a><a class="pill home-sort-btn-grp" href="#home_grp">By Groups</a></div>
 </div>
 <div id="home-content">
-<div class="grid">
+<div class="home-view-az"><div class="grid">
 <a class="btn" href="#Algeria_top"><div class="badge"><img alt="Algeria" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxNjAgMTIwIj48cmVjdCB4PSIwIiB5PSIwIiB3aWR0aD0iMTYwIiBoZWlnaHQ9IjEyMCIgZmlsbD0iIzAwNjIzMyIvPjxyZWN0IHg9IjAiIHk9IjAiIHdpZHRoPSI4MCIgaGVpZ2h0PSIxMjAiIGZpbGw9IndoaXRlIi8+PGNpcmNsZSBjeD0iNzYiIGN5PSI2MCIgcj0iMjQiIGZpbGw9IiNEMjEwMzQiLz48Y2lyY2xlIGN4PSI4MyIgY3k9IjYwIiByPSIyMCIgZmlsbD0iIzAwNjIzMyIvPjxwb2x5Z29uIHBvaW50cz0iOTIsNTMgOTQsNjAgOTIsNjcgOTgsNjIgMTA0LDYwIDk4LDU4IiBmaWxsPSIjRDIxMDM0Ii8+PC9zdmc+"/><div class="gloss"></div></div><div class="name">Algeria</div></a>
 <a class="btn" href="#Argentina_top"><div class="badge"><img alt="Argentina" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxNjAgMTIwIj48cmVjdCB4PSIwIiB5PSIwIiB3aWR0aD0iMTYwIiBoZWlnaHQ9IjQwIiBmaWxsPSIjNzRBQ0RGIi8+PHJlY3QgeD0iMCIgeT0iNDAiIHdpZHRoPSIxNjAiIGhlaWdodD0iNDAiIGZpbGw9IndoaXRlIi8+PHJlY3QgeD0iMCIgeT0iODAiIHdpZHRoPSIxNjAiIGhlaWdodD0iNDAiIGZpbGw9IiM3NEFDREYiLz48Y2lyY2xlIGN4PSI4MCIgY3k9IjYwIiByPSIxNCIgZmlsbD0iI0Y2QjQwRSIvPjxjaXJjbGUgY3g9IjgwIiBjeT0iNjAiIHI9IjEwIiBmaWxsPSIjODQzNTExIi8+PC9zdmc+"/><div class="gloss"></div></div><div class="name">Argentina</div></a>
 <a class="btn" href="#Australia_top"><div class="badge"><img alt="Australia" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxNjAgMTIwIj48cmVjdCB4PSIwIiB5PSIwIiB3aWR0aD0iMTYwIiBoZWlnaHQ9IjEyMCIgZmlsbD0iIzAwMDA4QiIvPjxyZWN0IHg9IjAiIHk9IjAiIHdpZHRoPSI4MCIgaGVpZ2h0PSI2MCIgZmlsbD0iIzAwMDA4QiIvPjxyZWN0IHg9IjAiIHk9IjAiIHdpZHRoPSI4MCIgaGVpZ2h0PSI4IiBmaWxsPSIjRkZGRkZGIi8+PHJlY3QgeD0iMCIgeT0iMjYiIHdpZHRoPSI4MCIgaGVpZ2h0PSI4IiBmaWxsPSIjRkZGRkZGIi8+PHJlY3QgeD0iMzYiIHk9IjAiIHdpZHRoPSI4IiBoZWlnaHQ9IjYwIiBmaWxsPSIjRkZGRkZGIi8+PHJlY3QgeD0iMCIgeT0iNCIgd2lkdGg9IjgwIiBoZWlnaHQ9IjQiIGZpbGw9IiNDQzAwMDAiLz48cmVjdCB4PSIwIiB5PSIyOCIgd2lkdGg9IjgwIiBoZWlnaHQ9IjQiIGZpbGw9IiNDQzAwMDAiLz48cmVjdCB4PSIzOCIgeT0iMCIgd2lkdGg9IjQiIGhlaWdodD0iNjAiIGZpbGw9IiNDQzAwMDAiLz48Y2lyY2xlIGN4PSIxMTAiIGN5PSI4NSIgcj0iOCIgZmlsbD0id2hpdGUiLz48Y2lyY2xlIGN4PSIxMzAiIGN5PSI1MCIgcj0iNiIgZmlsbD0id2hpdGUiLz48Y2lyY2xlIGN4PSIxMTAiIGN5PSIzMCIgcj0iNSIgZmlsbD0id2hpdGUiLz48Y2lyY2xlIGN4PSIxNDAiIGN5PSI3MiIgcj0iNCIgZmlsbD0id2hpdGUiLz48L3N2Zz4="/><div class="gloss"></div></div><div class="name">Australia</div></a>
@@ -879,7 +900,8 @@ footer { text-align:center; padding:20px 16px 32px; font-size:10px; color:rgba(2
 <a class="btn" href="#Uzbekistan_top"><div class="badge"><img alt="Uzbekistan" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxNjAgMTIwIj48cmVjdCB4PSIwIiB5PSIwIiB3aWR0aD0iMTYwIiBoZWlnaHQ9IjQwIiBmaWxsPSIjMUVCNTNBIi8+PHJlY3QgeD0iMCIgeT0iNDAiIHdpZHRoPSIxNjAiIGhlaWdodD0iNDAiIGZpbGw9IndoaXRlIi8+PHJlY3QgeD0iMCIgeT0iODAiIHdpZHRoPSIxNjAiIGhlaWdodD0iNDAiIGZpbGw9IiMwMDk5QjUiLz48cmVjdCB4PSIwIiB5PSIzOCIgd2lkdGg9IjE2MCIgaGVpZ2h0PSI0IiBmaWxsPSIjQ0UxMTI2Ii8+PHJlY3QgeD0iMCIgeT0iNzgiIHdpZHRoPSIxNjAiIGhlaWdodD0iNCIgZmlsbD0iI0NFMTEyNiIvPjxjaXJjbGUgY3g9IjI0IiBjeT0iMTYiIHI9IjEyIiBmaWxsPSJ3aGl0ZSIvPjxjaXJjbGUgY3g9IjMwIiBjeT0iMTYiIHI9IjEwIiBmaWxsPSIjMDA5OUI1Ii8+PGNpcmNsZSBjeD0iNDYiIGN5PSI4IiByPSIyIiBmaWxsPSJ3aGl0ZSIvPjxjaXJjbGUgY3g9IjU4IiBjeT0iOCIgcj0iMiIgZmlsbD0id2hpdGUiLz48Y2lyY2xlIGN4PSI3MCIgY3k9IjgiIHI9IjIiIGZpbGw9IndoaXRlIi8+PGNpcmNsZSBjeD0iNDYiIGN5PSIxOCIgcj0iMiIgZmlsbD0id2hpdGUiLz48Y2lyY2xlIGN4PSI1OCIgY3k9IjE4IiByPSIyIiBmaWxsPSJ3aGl0ZSIvPjxjaXJjbGUgY3g9IjcwIiBjeT0iMTgiIHI9IjIiIGZpbGw9IndoaXRlIi8+PGNpcmNsZSBjeD0iNDYiIGN5PSIyOCIgcj0iMiIgZmlsbD0id2hpdGUiLz48Y2lyY2xlIGN4PSI1OCIgY3k9IjI4IiByPSIyIiBmaWxsPSJ3aGl0ZSIvPjxjaXJjbGUgY3g9IjcwIiBjeT0iMjgiIHI9IjIiIGZpbGw9IndoaXRlIi8+PC9zdmc+"/><div class="gloss"></div></div><div class="name">Uzbekistan</div></a>
 </div>
 <footer>FIFA World Cup 2026 · All 48 Squads</footer>
-</div></div>
+</div></div></div>
+<div class="home-view-grp grid-groups"><div class="group-block"><div class="group-label">Group A</div><div class="group-2x2"><a class="btn" href="#Mexico_top"><div class="badge"><img alt="Mexico" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxNjAgMTIwIj48cmVjdCB4PSIwIiB5PSIwIiB3aWR0aD0iNTMiIGhlaWdodD0iMTIwIiBmaWxsPSIjMDA2ODQ3Ii8+PHJlY3QgeD0iNTMiIHk9IjAiIHdpZHRoPSI1MyIgaGVpZ2h0PSIxMjAiIGZpbGw9IndoaXRlIi8+PHJlY3QgeD0iMTA2IiB5PSIwIiB3aWR0aD0iNTMiIGhlaWdodD0iMTIwIiBmaWxsPSIjQ0UxMTI2Ii8+PHRleHQgeD0iODAiIHk9IjY1IiBmb250LXNpemU9IjIyIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIj7wn6aFPC90ZXh0Pjwvc3ZnPg=="/><div class="gloss"></div></div><div class="name">Mexico</div></a><a class="btn" href="#South_Africa_top"><div class="badge"><img alt="South Africa" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxNjAgMTIwIj48cmVjdCB4PSIwIiB5PSIwIiB3aWR0aD0iMTYwIiBoZWlnaHQ9IjQwIiBmaWxsPSIjMDA3QTREIi8+PHJlY3QgeD0iMCIgeT0iODAiIHdpZHRoPSIxNjAiIGhlaWdodD0iNDAiIGZpbGw9IiMwMDNEQTUiLz48cmVjdCB4PSIwIiB5PSI0MCIgd2lkdGg9IjE2MCIgaGVpZ2h0PSI0MCIgZmlsbD0iI0RFMzgzMSIvPjxwb2x5Z29uIHBvaW50cz0iMCwwIDgwLDYwIDAsMTIwIiBmaWxsPSIjMDAwMDAwIi8+PHBvbHlnb24gcG9pbnRzPSIwLDggNzYsNjAgMCwxMTIiIGZpbGw9IiNGRkI4MUMiLz48cG9seWdvbiBwb2ludHM9IjAsNDAgNTMsNjAgMCw4MCIgZmlsbD0id2hpdGUiLz48L3N2Zz4="/><div class="gloss"></div></div><div class="name">South Africa</div></a><a class="btn" href="#South_Korea_top"><div class="badge"><img alt="South Korea" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxNjAgMTIwIj48cmVjdCB4PSIwIiB5PSIwIiB3aWR0aD0iMTYwIiBoZWlnaHQ9IjEyMCIgZmlsbD0id2hpdGUiLz48Y2lyY2xlIGN4PSI4MCIgY3k9IjYwIiByPSIyMiIgZmlsbD0iI0M2MEMzMCIvPjxwYXRoIGQ9Ik0gNjYsNDYgQSAyMiwyMiAwIDAsMSA5NCw3NCIgZmlsbD0iIzAwMzQ3OCIvPjxwYXRoIGQ9Ik0gNjYsNDYgQSAxMSwxMSAwIDAsMCA4MCw2MCIgZmlsbD0iI0M2MEMzMCIvPjxwYXRoIGQ9Ik0gODAsNjAgQSAxMSwxMSAwIDAsMSA5NCw3NCIgZmlsbD0iI0M2MEMzMCIvPjxyZWN0IHg9IjMwIiB5PSIzMCIgd2lkdGg9IjYiIGhlaWdodD0iNCIgZmlsbD0iIzAwMCIvPjxyZWN0IHg9IjMwIiB5PSIzNyIgd2lkdGg9IjYiIGhlaWdodD0iNCIgZmlsbD0iIzAwMCIvPjxyZWN0IHg9IjMwIiB5PSI0NCIgd2lkdGg9IjYiIGhlaWdodD0iNCIgZmlsbD0iIzAwMCIvPjxyZWN0IHg9IjExOCIgeT0iMzAiIHdpZHRoPSI2IiBoZWlnaHQ9IjQiIGZpbGw9IiMwMDAiLz48cmVjdCB4PSIxMTgiIHk9IjM3IiB3aWR0aD0iNiIgaGVpZ2h0PSI0IiBmaWxsPSIjMDAwIi8+PHJlY3QgeD0iMTE4IiB5PSI0NCIgd2lkdGg9IjYiIGhlaWdodD0iNCIgZmlsbD0iIzAwMCIvPjxyZWN0IHg9IjMwIiB5PSI3NiIgd2lkdGg9IjYiIGhlaWdodD0iNCIgZmlsbD0iIzAwMCIvPjxyZWN0IHg9IjMwIiB5PSI4MyIgd2lkdGg9IjYiIGhlaWdodD0iNCIgZmlsbD0iIzAwMCIvPjxyZWN0IHg9IjMwIiB5PSI5MCIgd2lkdGg9IjYiIGhlaWdodD0iNCIgZmlsbD0iIzAwMCIvPjxyZWN0IHg9IjExOCIgeT0iNzYiIHdpZHRoPSI2IiBoZWlnaHQ9IjQiIGZpbGw9IiMwMDAiLz48cmVjdCB4PSIxMTgiIHk9IjgzIiB3aWR0aD0iNiIgaGVpZ2h0PSI0IiBmaWxsPSIjMDAwIi8+PHJlY3QgeD0iMTE4IiB5PSI5MCIgd2lkdGg9IjYiIGhlaWdodD0iNCIgZmlsbD0iIzAwMCIvPjwvc3ZnPg=="/><div class="gloss"></div></div><div class="name">South Korea</div></a><a class="btn" href="#Czech_Republic_top"><div class="badge"><img alt="Czech Republic" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxNjAgMTIwIj48cmVjdCB4PSIwIiB5PSIwIiB3aWR0aD0iMTYwIiBoZWlnaHQ9IjYwIiBmaWxsPSJ3aGl0ZSIvPjxyZWN0IHg9IjAiIHk9IjYwIiB3aWR0aD0iMTYwIiBoZWlnaHQ9IjYwIiBmaWxsPSIjRDcxNDFBIi8+PHBvbHlnb24gcG9pbnRzPSIwLDAgODAsNjAgMCwxMjAiIGZpbGw9IiMxMTQ1N0UiLz48L3N2Zz4="/><div class="gloss"></div></div><div class="name">Czech Republic</div></a></div></div><div class="group-block"><div class="group-label">Group B</div><div class="group-2x2"><a class="btn" href="#Canada_top"><div class="badge"><img alt="Canada" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxNjAgMTIwIj48cmVjdCB4PSIwIiB5PSIwIiB3aWR0aD0iNDAiIGhlaWdodD0iMTIwIiBmaWxsPSIjRkYwMDAwIi8+PHJlY3QgeD0iNDAiIHk9IjAiIHdpZHRoPSI4MCIgaGVpZ2h0PSIxMjAiIGZpbGw9IndoaXRlIi8+PHJlY3QgeD0iMTIwIiB5PSIwIiB3aWR0aD0iNDAiIGhlaWdodD0iMTIwIiBmaWxsPSIjRkYwMDAwIi8+PHBvbHlnb24gcG9pbnRzPSI4MCwyMCA4Niw0MCAxMDIsMzYgOTQsNTIgMTA2LDUwIDgwLDcyIDU0LDUwIDY2LDUyIDU4LDM2IDc0LDQwIiBmaWxsPSIjRkYwMDAwIi8+PHJlY3QgeD0iNzYiIHk9IjcwIiB3aWR0aD0iOCIgaGVpZ2h0PSIyMCIgZmlsbD0iI0ZGMDAwMCIvPjwvc3ZnPg=="/><div class="gloss"></div></div><div class="name">Canada</div></a><a class="btn" href="#Bosnia___Herzegovina_top"><div class="badge"><img alt="Bosnia &amp; Herzegovina" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxNjAgMTIwIj48cmVjdCB4PSIwIiB5PSIwIiB3aWR0aD0iMTYwIiBoZWlnaHQ9IjEyMCIgZmlsbD0iIzAwMjM5NSIvPjxwb2x5Z29uIHBvaW50cz0iMCwwIDE2MCwwIDE2MCwxMjAiIGZpbGw9IiNGRkNEMDAiLz48Y2lyY2xlIGN4PSIxNSIgY3k9IjUiIHI9IjQiIGZpbGw9IndoaXRlIi8+PGNpcmNsZSBjeD0iMzIiIGN5PSIxOCIgcj0iNCIgZmlsbD0id2hpdGUiLz48Y2lyY2xlIGN4PSI0OSIgY3k9IjMxIiByPSI0IiBmaWxsPSJ3aGl0ZSIvPjxjaXJjbGUgY3g9IjY2IiBjeT0iNDQiIHI9IjQiIGZpbGw9IndoaXRlIi8+PGNpcmNsZSBjeD0iODMiIGN5PSI1NyIgcj0iNCIgZmlsbD0id2hpdGUiLz48Y2lyY2xlIGN4PSIxMDAiIGN5PSI3MCIgcj0iNCIgZmlsbD0id2hpdGUiLz48L3N2Zz4="/><div class="gloss"></div></div><div class="name">Bosnia &amp; Herzegovina</div></a><a class="btn" href="#Qatar_top"><div class="badge"><img alt="Qatar" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxNjAgMTIwIj48cmVjdCB4PSIwIiB5PSIwIiB3aWR0aD0iMTYwIiBoZWlnaHQ9IjEyMCIgZmlsbD0iIzhEMUIzRCIvPjxyZWN0IHg9IjAiIHk9IjAiIHdpZHRoPSI0MCIgaGVpZ2h0PSIxMjAiIGZpbGw9IndoaXRlIi8+PHBvbHlnb24gcG9pbnRzPSI0MCwwIDUyLDYgNDAsMTIiIGZpbGw9IiM4RDFCM0QiLz48cG9seWdvbiBwb2ludHM9IjQwLDEyIDUyLDE4IDQwLDI0IiBmaWxsPSIjOEQxQjNEIi8+PHBvbHlnb24gcG9pbnRzPSI0MCwyNCA1MiwzMCA0MCwzNiIgZmlsbD0iIzhEMUIzRCIvPjxwb2x5Z29uIHBvaW50cz0iNDAsMzYgNTIsNDIgNDAsNDgiIGZpbGw9IiM4RDFCM0QiLz48cG9seWdvbiBwb2ludHM9IjQwLDQ4IDUyLDU0IDQwLDYwIiBmaWxsPSIjOEQxQjNEIi8+PHBvbHlnb24gcG9pbnRzPSI0MCw2MCA1Miw2NiA0MCw3MiIgZmlsbD0iIzhEMUIzRCIvPjxwb2x5Z29uIHBvaW50cz0iNDAsNzIgNTIsNzggNDAsODQiIGZpbGw9IiM4RDFCM0QiLz48cG9seWdvbiBwb2ludHM9IjQwLDg0IDUyLDkwIDQwLDk2IiBmaWxsPSIjOEQxQjNEIi8+PHBvbHlnb24gcG9pbnRzPSI0MCw5NiA1MiwxMDIgNDAsMTA4IiBmaWxsPSIjOEQxQjNEIi8+PHBvbHlnb24gcG9pbnRzPSI0MCwxMDggNTIsMTE0IDQwLDEyMCIgZmlsbD0iIzhEMUIzRCIvPjwvc3ZnPg=="/><div class="gloss"></div></div><div class="name">Qatar</div></a><a class="btn" href="#Switzerland_top"><div class="badge"><img alt="Switzerland" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxNjAgMTIwIj48cmVjdCB4PSIwIiB5PSIwIiB3aWR0aD0iMTYwIiBoZWlnaHQ9IjEyMCIgZmlsbD0iI0ZGMDAwMCIvPjxyZWN0IHg9IjcyIiB5PSIzNiIgd2lkdGg9IjE2IiBoZWlnaHQ9IjQ4IiBmaWxsPSJ3aGl0ZSIvPjxyZWN0IHg9IjU2IiB5PSI1MiIgd2lkdGg9IjQ4IiBoZWlnaHQ9IjE2IiBmaWxsPSJ3aGl0ZSIvPjwvc3ZnPg=="/><div class="gloss"></div></div><div class="name">Switzerland</div></a></div></div><div class="group-block"><div class="group-label">Group C</div><div class="group-2x2"><a class="btn" href="#Brazil_top"><div class="badge"><img alt="Brazil" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxNjAgMTIwIj48cmVjdCB4PSIwIiB5PSIwIiB3aWR0aD0iMTYwIiBoZWlnaHQ9IjEyMCIgZmlsbD0iIzAwOUMzQiIvPjxwb2x5Z29uIHBvaW50cz0iODAsOCAxNTIsNjAgODAsMTEyIDgsNjAiIGZpbGw9IiNGRkRGMDAiLz48Y2lyY2xlIGN4PSI4MCIgY3k9IjYwIiByPSIyOCIgZmlsbD0iIzAwMjc3NiIvPjx0ZXh0IHg9IjgwIiB5PSI2MiIgZm9udC1zaXplPSI3IiBmaWxsPSJ3aGl0ZSIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZm9udC13ZWlnaHQ9ImJvbGQiPk9SREVNIEUgUFJPR1JFU1NPPC90ZXh0PjxjaXJjbGUgY3g9Ijc2IiBjeT0iNTAiIHI9IjMiIGZpbGw9IndoaXRlIi8+PGNpcmNsZSBjeD0iODgiIGN5PSI0NiIgcj0iMiIgZmlsbD0id2hpdGUiLz48Y2lyY2xlIGN4PSI5NiIgY3k9IjU0IiByPSIyIiBmaWxsPSJ3aGl0ZSIvPjxjaXJjbGUgY3g9Ijk0IiBjeT0iNjYiIHI9IjIiIGZpbGw9IndoaXRlIi8+PGNpcmNsZSBjeD0iNzAiIGN5PSI2OCIgcj0iMiIgZmlsbD0id2hpdGUiLz48L3N2Zz4="/><div class="gloss"></div></div><div class="name">Brazil</div></a><a class="btn" href="#Morocco_top"><div class="badge"><img alt="Morocco" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxNjAgMTIwIj48cmVjdCB4PSIwIiB5PSIwIiB3aWR0aD0iMTYwIiBoZWlnaHQ9IjEyMCIgZmlsbD0iI0MxMjcyRCIvPjxwb2x5Z29uIHBvaW50cz0iODAsMzIgODgsNTYgMTA2LDU2IDkyLDcwIDk4LDkwIDgwLDc4IDYyLDkwIDY4LDcwIDU0LDU2IDcyLDU2IiBmaWxsPSJub25lIiBzdHJva2U9IiMwMDYyMzMiIHN0cm9rZS13aWR0aD0iMi41Ii8+PC9zdmc+"/><div class="gloss"></div></div><div class="name">Morocco</div></a><a class="btn" href="#Haiti_top"><div class="badge"><img alt="Haiti" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxNjAgMTIwIj48cmVjdCB4PSIwIiB5PSIwIiB3aWR0aD0iMTYwIiBoZWlnaHQ9IjYwIiBmaWxsPSIjMDAyMDlGIi8+PHJlY3QgeD0iMCIgeT0iNjAiIHdpZHRoPSIxNjAiIGhlaWdodD0iNjAiIGZpbGw9IiNEMjEwMzQiLz48cmVjdCB4PSI2NCIgeT0iNDQiIHdpZHRoPSIzMiIgaGVpZ2h0PSIzMiIgZmlsbD0id2hpdGUiLz48dGV4dCB4PSI4MCIgeT0iNjYiIGZvbnQtc2l6ZT0iMTgiIHRleHQtYW5jaG9yPSJtaWRkbGUiPvCfjLQ8L3RleHQ+PC9zdmc+"/><div class="gloss"></div></div><div class="name">Haiti</div></a><a class="btn" href="#Scotland_top"><div class="badge"><img alt="Scotland" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxNjAgMTIwIj48cmVjdCB4PSIwIiB5PSIwIiB3aWR0aD0iMTYwIiBoZWlnaHQ9IjEyMCIgZmlsbD0iIzAwMzA4NyIvPjxsaW5lIHgxPSIwIiB5MT0iMCIgeDI9IjE2MCIgeTI9IjEyMCIgc3Ryb2tlPSJ3aGl0ZSIgc3Ryb2tlLXdpZHRoPSIxNiIvPjxsaW5lIHgxPSIxNjAiIHkxPSIwIiB4Mj0iMCIgeTI9IjEyMCIgc3Ryb2tlPSJ3aGl0ZSIgc3Ryb2tlLXdpZHRoPSIxNiIvPjwvc3ZnPg=="/><div class="gloss"></div></div><div class="name">Scotland</div></a></div></div><div class="group-block"><div class="group-label">Group D</div><div class="group-2x2"><a class="btn" href="#United_States_top"><div class="badge"><img alt="United States" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxNjAgMTIwIj48cmVjdCB4PSIwIiB5PSIwIiB3aWR0aD0iMTYwIiBoZWlnaHQ9IjkiIGZpbGw9IiNCMjIyMzQiLz48cmVjdCB4PSIwIiB5PSI5IiB3aWR0aD0iMTYwIiBoZWlnaHQ9IjkiIGZpbGw9IndoaXRlIi8+PHJlY3QgeD0iMCIgeT0iMTgiIHdpZHRoPSIxNjAiIGhlaWdodD0iOSIgZmlsbD0iI0IyMjIzNCIvPjxyZWN0IHg9IjAiIHk9IjI3IiB3aWR0aD0iMTYwIiBoZWlnaHQ9IjkiIGZpbGw9IndoaXRlIi8+PHJlY3QgeD0iMCIgeT0iMzYiIHdpZHRoPSIxNjAiIGhlaWdodD0iOSIgZmlsbD0iI0IyMjIzNCIvPjxyZWN0IHg9IjAiIHk9IjQ2IiB3aWR0aD0iMTYwIiBoZWlnaHQ9IjkiIGZpbGw9IndoaXRlIi8+PHJlY3QgeD0iMCIgeT0iNTUiIHdpZHRoPSIxNjAiIGhlaWdodD0iOSIgZmlsbD0iI0IyMjIzNCIvPjxyZWN0IHg9IjAiIHk9IjY0IiB3aWR0aD0iMTYwIiBoZWlnaHQ9IjkiIGZpbGw9IndoaXRlIi8+PHJlY3QgeD0iMCIgeT0iNzMiIHdpZHRoPSIxNjAiIGhlaWdodD0iOSIgZmlsbD0iI0IyMjIzNCIvPjxyZWN0IHg9IjAiIHk9IjgzIiB3aWR0aD0iMTYwIiBoZWlnaHQ9IjkiIGZpbGw9IndoaXRlIi8+PHJlY3QgeD0iMCIgeT0iOTIiIHdpZHRoPSIxNjAiIGhlaWdodD0iOSIgZmlsbD0iI0IyMjIzNCIvPjxyZWN0IHg9IjAiIHk9IjEwMSIgd2lkdGg9IjE2MCIgaGVpZ2h0PSI5IiBmaWxsPSJ3aGl0ZSIvPjxyZWN0IHg9IjAiIHk9IjExMCIgd2lkdGg9IjE2MCIgaGVpZ2h0PSI5IiBmaWxsPSIjQjIyMjM0Ii8+PHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjgwIiBoZWlnaHQ9IjY0IiBmaWxsPSIjM0MzQjZFIi8+PGNpcmNsZSBjeD0iOCIgY3k9IjYiIHI9IjMiIGZpbGw9IndoaXRlIi8+PGNpcmNsZSBjeD0iMjIiIGN5PSI2IiByPSIzIiBmaWxsPSJ3aGl0ZSIvPjxjaXJjbGUgY3g9IjM2IiBjeT0iNiIgcj0iMyIgZmlsbD0id2hpdGUiLz48Y2lyY2xlIGN4PSI1MCIgY3k9IjYiIHI9IjMiIGZpbGw9IndoaXRlIi8+PGNpcmNsZSBjeD0iNjQiIGN5PSI2IiByPSIzIiBmaWxsPSJ3aGl0ZSIvPjxjaXJjbGUgY3g9IjE1IiBjeT0iMTYiIHI9IjMiIGZpbGw9IndoaXRlIi8+PGNpcmNsZSBjeD0iMjkiIGN5PSIxNiIgcj0iMyIgZmlsbD0id2hpdGUiLz48Y2lyY2xlIGN4PSI0MyIgY3k9IjE2IiByPSIzIiBmaWxsPSJ3aGl0ZSIvPjxjaXJjbGUgY3g9IjU3IiBjeT0iMTYiIHI9IjMiIGZpbGw9IndoaXRlIi8+PGNpcmNsZSBjeD0iNzEiIGN5PSIxNiIgcj0iMyIgZmlsbD0id2hpdGUiLz48Y2lyY2xlIGN4PSI4IiBjeT0iMjYiIHI9IjMiIGZpbGw9IndoaXRlIi8+PGNpcmNsZSBjeD0iMjIiIGN5PSIyNiIgcj0iMyIgZmlsbD0id2hpdGUiLz48Y2lyY2xlIGN4PSIzNiIgY3k9IjI2IiByPSIzIiBmaWxsPSJ3aGl0ZSIvPjxjaXJjbGUgY3g9IjUwIiBjeT0iMjYiIHI9IjMiIGZpbGw9IndoaXRlIi8+PGNpcmNsZSBjeD0iNjQiIGN5PSIyNiIgcj0iMyIgZmlsbD0id2hpdGUiLz48Y2lyY2xlIGN4PSIxNSIgY3k9IjM2IiByPSIzIiBmaWxsPSJ3aGl0ZSIvPjxjaXJjbGUgY3g9IjI5IiBjeT0iMzYiIHI9IjMiIGZpbGw9IndoaXRlIi8+PGNpcmNsZSBjeD0iNDMiIGN5PSIzNiIgcj0iMyIgZmlsbD0id2hpdGUiLz48Y2lyY2xlIGN4PSI1NyIgY3k9IjM2IiByPSIzIiBmaWxsPSJ3aGl0ZSIvPjxjaXJjbGUgY3g9IjcxIiBjeT0iMzYiIHI9IjMiIGZpbGw9IndoaXRlIi8+PGNpcmNsZSBjeD0iOCIgY3k9IjQ2IiByPSIzIiBmaWxsPSJ3aGl0ZSIvPjxjaXJjbGUgY3g9IjIyIiBjeT0iNDYiIHI9IjMiIGZpbGw9IndoaXRlIi8+PGNpcmNsZSBjeD0iMzYiIGN5PSI0NiIgcj0iMyIgZmlsbD0id2hpdGUiLz48Y2lyY2xlIGN4PSI1MCIgY3k9IjQ2IiByPSIzIiBmaWxsPSJ3aGl0ZSIvPjxjaXJjbGUgY3g9IjY0IiBjeT0iNDYiIHI9IjMiIGZpbGw9IndoaXRlIi8+PC9zdmc+"/><div class="gloss"></div></div><div class="name">United States</div></a><a class="btn" href="#Paraguay_top"><div class="badge"><img alt="Paraguay" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxNjAgMTIwIj48cmVjdCB4PSIwIiB5PSIwIiB3aWR0aD0iMTYwIiBoZWlnaHQ9IjQwIiBmaWxsPSIjRDUyQjFFIi8+PHJlY3QgeD0iMCIgeT0iNDAiIHdpZHRoPSIxNjAiIGhlaWdodD0iNDAiIGZpbGw9IndoaXRlIi8+PHJlY3QgeD0iMCIgeT0iODAiIHdpZHRoPSIxNjAiIGhlaWdodD0iNDAiIGZpbGw9IiMwMDlCREUiLz48Y2lyY2xlIGN4PSI4MCIgY3k9IjYwIiByPSIxNiIgZmlsbD0iIzAwOUJERSIvPjxjaXJjbGUgY3g9IjgwIiBjeT0iNjAiIHI9IjEwIiBmaWxsPSJ3aGl0ZSIvPjxjaXJjbGUgY3g9IjgwIiBjeT0iNjAiIHI9IjUiIGZpbGw9IiNENTJCMUUiLz48L3N2Zz4="/><div class="gloss"></div></div><div class="name">Paraguay</div></a><a class="btn" href="#Australia_top"><div class="badge"><img alt="Australia" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxNjAgMTIwIj48cmVjdCB4PSIwIiB5PSIwIiB3aWR0aD0iMTYwIiBoZWlnaHQ9IjEyMCIgZmlsbD0iIzAwMDA4QiIvPjxyZWN0IHg9IjAiIHk9IjAiIHdpZHRoPSI4MCIgaGVpZ2h0PSI2MCIgZmlsbD0iIzAwMDA4QiIvPjxyZWN0IHg9IjAiIHk9IjAiIHdpZHRoPSI4MCIgaGVpZ2h0PSI4IiBmaWxsPSIjRkZGRkZGIi8+PHJlY3QgeD0iMCIgeT0iMjYiIHdpZHRoPSI4MCIgaGVpZ2h0PSI4IiBmaWxsPSIjRkZGRkZGIi8+PHJlY3QgeD0iMzYiIHk9IjAiIHdpZHRoPSI4IiBoZWlnaHQ9IjYwIiBmaWxsPSIjRkZGRkZGIi8+PHJlY3QgeD0iMCIgeT0iNCIgd2lkdGg9IjgwIiBoZWlnaHQ9IjQiIGZpbGw9IiNDQzAwMDAiLz48cmVjdCB4PSIwIiB5PSIyOCIgd2lkdGg9IjgwIiBoZWlnaHQ9IjQiIGZpbGw9IiNDQzAwMDAiLz48cmVjdCB4PSIzOCIgeT0iMCIgd2lkdGg9IjQiIGhlaWdodD0iNjAiIGZpbGw9IiNDQzAwMDAiLz48Y2lyY2xlIGN4PSIxMTAiIGN5PSI4NSIgcj0iOCIgZmlsbD0id2hpdGUiLz48Y2lyY2xlIGN4PSIxMzAiIGN5PSI1MCIgcj0iNiIgZmlsbD0id2hpdGUiLz48Y2lyY2xlIGN4PSIxMTAiIGN5PSIzMCIgcj0iNSIgZmlsbD0id2hpdGUiLz48Y2lyY2xlIGN4PSIxNDAiIGN5PSI3MiIgcj0iNCIgZmlsbD0id2hpdGUiLz48L3N2Zz4="/><div class="gloss"></div></div><div class="name">Australia</div></a><a class="btn" href="#Turkey_top"><div class="badge"><img alt="Turkey" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxNjAgMTIwIj48cmVjdCB4PSIwIiB5PSIwIiB3aWR0aD0iMTYwIiBoZWlnaHQ9IjEyMCIgZmlsbD0iI0UzMEExNyIvPjxjaXJjbGUgY3g9IjcwIiBjeT0iNjAiIHI9IjI0IiBmaWxsPSJ3aGl0ZSIvPjxjaXJjbGUgY3g9Ijc2IiBjeT0iNjAiIHI9IjE4IiBmaWxsPSIjRTMwQTE3Ii8+PHBvbHlnb24gcG9pbnRzPSI5Niw1MiA5OCw2MCA5Niw2OCAxMDIsNjMgMTA3LDYwIDEwMiw1NyIgZmlsbD0id2hpdGUiLz48L3N2Zz4="/><div class="gloss"></div></div><div class="name">Turkey</div></a></div></div><div class="group-block"><div class="group-label">Group E</div><div class="group-2x2"><a class="btn" href="#Germany_top"><div class="badge"><img alt="Germany" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxNjAgMTIwIj48cmVjdCB4PSIwIiB5PSIwIiB3aWR0aD0iMTYwIiBoZWlnaHQ9IjQwIiBmaWxsPSIjMDAwMDAwIi8+PHJlY3QgeD0iMCIgeT0iNDAiIHdpZHRoPSIxNjAiIGhlaWdodD0iNDAiIGZpbGw9IiNERDAwMDAiLz48cmVjdCB4PSIwIiB5PSI4MCIgd2lkdGg9IjE2MCIgaGVpZ2h0PSI0MCIgZmlsbD0iI0ZGQ0UwMCIvPjwvc3ZnPg=="/><div class="gloss"></div></div><div class="name">Germany</div></a><a class="btn" href="#Curacao_top"><div class="badge"><img alt="Curacao" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxNjAgMTIwIj48cmVjdCB4PSIwIiB5PSIwIiB3aWR0aD0iMTYwIiBoZWlnaHQ9IjEyMCIgZmlsbD0iIzAwM0RBNSIvPjxyZWN0IHg9IjAiIHk9Ijc1IiB3aWR0aD0iMTYwIiBoZWlnaHQ9IjgiIGZpbGw9IiNGOUU4MTQiLz48cmVjdCB4PSIwIiB5PSI4NyIgd2lkdGg9IjE2MCIgaGVpZ2h0PSI0IiBmaWxsPSIjRjlFODE0Ii8+PGNpcmNsZSBjeD0iMzAiIGN5PSI0MCIgcj0iMTIiIGZpbGw9IndoaXRlIi8+PHBvbHlnb24gcG9pbnRzPSIzMCwyMCAzMiwyNyAzMCwzNCAzNiwyOSA0MiwyNyAzNiwyNSIgZmlsbD0id2hpdGUiLz48L3N2Zz4="/><div class="gloss"></div></div><div class="name">Curacao</div></a><a class="btn" href="#Ivory_Coast_top"><div class="badge"><img alt="Ivory Coast" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxNjAgMTIwIj48cmVjdCB4PSIwIiB5PSIwIiB3aWR0aD0iNTMiIGhlaWdodD0iMTIwIiBmaWxsPSIjRjc3RjAwIi8+PHJlY3QgeD0iNTMiIHk9IjAiIHdpZHRoPSI1MyIgaGVpZ2h0PSIxMjAiIGZpbGw9IndoaXRlIi8+PHJlY3QgeD0iMTA2IiB5PSIwIiB3aWR0aD0iNTMiIGhlaWdodD0iMTIwIiBmaWxsPSIjMDA5QTQ0Ii8+PC9zdmc+"/><div class="gloss"></div></div><div class="name">Ivory Coast</div></a><a class="btn" href="#Ecuador_top"><div class="badge"><img alt="Ecuador" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxNjAgMTIwIj48cmVjdCB4PSIwIiB5PSIwIiB3aWR0aD0iMTYwIiBoZWlnaHQ9IjYwIiBmaWxsPSIjRkZEMTAwIi8+PHJlY3QgeD0iMCIgeT0iNjAiIHdpZHRoPSIxNjAiIGhlaWdodD0iMzAiIGZpbGw9IiMwMDcyQ0UiLz48cmVjdCB4PSIwIiB5PSI5MCIgd2lkdGg9IjE2MCIgaGVpZ2h0PSIzMCIgZmlsbD0iI0U4MDAwRCIvPjxjaXJjbGUgY3g9IjgwIiBjeT0iNjAiIHI9IjE4IiBmaWxsPSIjMDA3MkNFIi8+PGNpcmNsZSBjeD0iODAiIGN5PSI2MCIgcj0iMTIiIGZpbGw9IiNGRkQxMDAiLz48L3N2Zz4="/><div class="gloss"></div></div><div class="name">Ecuador</div></a></div></div><div class="group-block"><div class="group-label">Group F</div><div class="group-2x2"><a class="btn" href="#Netherlands_top"><div class="badge"><img alt="Netherlands" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxNjAgMTIwIj48cmVjdCB4PSIwIiB5PSIwIiB3aWR0aD0iMTYwIiBoZWlnaHQ9IjQwIiBmaWxsPSIjQUUxQzI4Ii8+PHJlY3QgeD0iMCIgeT0iNDAiIHdpZHRoPSIxNjAiIGhlaWdodD0iNDAiIGZpbGw9IndoaXRlIi8+PHJlY3QgeD0iMCIgeT0iODAiIHdpZHRoPSIxNjAiIGhlaWdodD0iNDAiIGZpbGw9IiMyMTQ2OEIiLz48L3N2Zz4="/><div class="gloss"></div></div><div class="name">Netherlands</div></a><a class="btn" href="#Japan_top"><div class="badge"><img alt="Japan" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxNjAgMTIwIj48cmVjdCB4PSIwIiB5PSIwIiB3aWR0aD0iMTYwIiBoZWlnaHQ9IjEyMCIgZmlsbD0id2hpdGUiLz48Y2lyY2xlIGN4PSI4MCIgY3k9IjYwIiByPSIzNCIgZmlsbD0iI0JDMDAyRCIvPjwvc3ZnPg=="/><div class="gloss"></div></div><div class="name">Japan</div></a><a class="btn" href="#Sweden_top"><div class="badge"><img alt="Sweden" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxNjAgMTIwIj48cmVjdCB4PSIwIiB5PSIwIiB3aWR0aD0iMTYwIiBoZWlnaHQ9IjEyMCIgZmlsbD0iIzAwNkFBNyIvPjxyZWN0IHg9IjQ1IiB5PSIwIiB3aWR0aD0iMTYiIGhlaWdodD0iMTIwIiBmaWxsPSIjRkVDQzAyIi8+PHJlY3QgeD0iMCIgeT0iNTIiIHdpZHRoPSIxNjAiIGhlaWdodD0iMTYiIGZpbGw9IiNGRUNDMDIiLz48L3N2Zz4="/><div class="gloss"></div></div><div class="name">Sweden</div></a><a class="btn" href="#Tunisia_top"><div class="badge"><img alt="Tunisia" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxNjAgMTIwIj48cmVjdCB4PSIwIiB5PSIwIiB3aWR0aD0iMTYwIiBoZWlnaHQ9IjEyMCIgZmlsbD0iI0U3MDAxMyIvPjxjaXJjbGUgY3g9IjgwIiBjeT0iNjAiIHI9IjI4IiBmaWxsPSJ3aGl0ZSIvPjxjaXJjbGUgY3g9Ijc2IiBjeT0iNjAiIHI9IjE4IiBmaWxsPSIjRTcwMDEzIi8+PGNpcmNsZSBjeD0iODQiIGN5PSI2MCIgcj0iMTQiIGZpbGw9IndoaXRlIi8+PHBvbHlnb24gcG9pbnRzPSI5MCw1MiA5Miw2MCA5MCw2OCA5Niw2NCAxMDAsNjAgOTYsNTYiIGZpbGw9IiNFNzAwMTMiLz48L3N2Zz4="/><div class="gloss"></div></div><div class="name">Tunisia</div></a></div></div><div class="group-block"><div class="group-label">Group G</div><div class="group-2x2"><a class="btn" href="#Belgium_top"><div class="badge"><img alt="Belgium" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxNjAgMTIwIj48cmVjdCB4PSIwIiB5PSIwIiB3aWR0aD0iNTMiIGhlaWdodD0iMTIwIiBmaWxsPSIjMDAwMDAwIi8+PHJlY3QgeD0iNTMiIHk9IjAiIHdpZHRoPSI1MyIgaGVpZ2h0PSIxMjAiIGZpbGw9IiNGQUUwNDIiLz48cmVjdCB4PSIxMDYiIHk9IjAiIHdpZHRoPSI1MyIgaGVpZ2h0PSIxMjAiIGZpbGw9IiNFRjMzNDAiLz48L3N2Zz4="/><div class="gloss"></div></div><div class="name">Belgium</div></a><a class="btn" href="#Egypt_top"><div class="badge"><img alt="Egypt" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxNjAgMTIwIj48cmVjdCB4PSIwIiB5PSIwIiB3aWR0aD0iMTYwIiBoZWlnaHQ9IjQwIiBmaWxsPSIjQ0UxMTI2Ii8+PHJlY3QgeD0iMCIgeT0iNDAiIHdpZHRoPSIxNjAiIGhlaWdodD0iNDAiIGZpbGw9IndoaXRlIi8+PHJlY3QgeD0iMCIgeT0iODAiIHdpZHRoPSIxNjAiIGhlaWdodD0iNDAiIGZpbGw9IiMwMDAwMDAiLz48dGV4dCB4PSI4MCIgeT0iNjQiIGZvbnQtc2l6ZT0iMjIiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZpbGw9IiNDMDkzMDAiPvCfpoU8L3RleHQ+PC9zdmc+"/><div class="gloss"></div></div><div class="name">Egypt</div></a><a class="btn" href="#Iran_top"><div class="badge"><img alt="Iran" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxNjAgMTIwIj48cmVjdCB4PSIwIiB5PSIwIiB3aWR0aD0iMTYwIiBoZWlnaHQ9IjQwIiBmaWxsPSIjMjM5RjQwIi8+PHJlY3QgeD0iMCIgeT0iNDAiIHdpZHRoPSIxNjAiIGhlaWdodD0iNDAiIGZpbGw9IndoaXRlIi8+PHJlY3QgeD0iMCIgeT0iODAiIHdpZHRoPSIxNjAiIGhlaWdodD0iNDAiIGZpbGw9IiNEQTAwMDAiLz48dGV4dCB4PSI4MCIgeT0iNjUiIGZvbnQtc2l6ZT0iMjAiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZpbGw9IiNEQTAwMDAiPuKYqjwvdGV4dD48L3N2Zz4="/><div class="gloss"></div></div><div class="name">Iran</div></a><a class="btn" href="#New_Zealand_top"><div class="badge"><img alt="New Zealand" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxNjAgMTIwIj48cmVjdCB4PSIwIiB5PSIwIiB3aWR0aD0iMTYwIiBoZWlnaHQ9IjEyMCIgZmlsbD0iIzAwMjQ3RCIvPjxyZWN0IHg9IjAiIHk9IjAiIHdpZHRoPSI4MCIgaGVpZ2h0PSI2MCIgZmlsbD0iIzAwMjQ3RCIvPjxyZWN0IHg9IjAiIHk9IjAiIHdpZHRoPSI4MCIgaGVpZ2h0PSI4IiBmaWxsPSJ3aGl0ZSIvPjxyZWN0IHg9IjAiIHk9IjI2IiB3aWR0aD0iODAiIGhlaWdodD0iOCIgZmlsbD0id2hpdGUiLz48cmVjdCB4PSIzNiIgeT0iMCIgd2lkdGg9IjgiIGhlaWdodD0iNjAiIGZpbGw9IndoaXRlIi8+PHJlY3QgeD0iMCIgeT0iNCIgd2lkdGg9IjgwIiBoZWlnaHQ9IjQiIGZpbGw9IiNDRjE0MkIiLz48cmVjdCB4PSIwIiB5PSIyOCIgd2lkdGg9IjgwIiBoZWlnaHQ9IjQiIGZpbGw9IiNDRjE0MkIiLz48cmVjdCB4PSIzOCIgeT0iMCIgd2lkdGg9IjQiIGhlaWdodD0iNjAiIGZpbGw9IiNDRjE0MkIiLz48Y2lyY2xlIGN4PSIxMTAiIGN5PSIzMCIgcj0iOCIgZmlsbD0iI0NDMTQyQiIvPjxjaXJjbGUgY3g9IjEyOCIgY3k9IjUyIiByPSI4IiBmaWxsPSIjQ0MxNDJCIi8+PGNpcmNsZSBjeD0iMTIwIiBjeT0iNzgiIHI9IjgiIGZpbGw9IiNDQzE0MkIiLz48Y2lyY2xlIGN4PSIxMDYiIGN5PSI2NCIgcj0iNSIgZmlsbD0iI0NDMTQyQiIvPjwvc3ZnPg=="/><div class="gloss"></div></div><div class="name">New Zealand</div></a></div></div><div class="group-block"><div class="group-label">Group H</div><div class="group-2x2"><a class="btn" href="#Spain_top"><div class="badge"><img alt="Spain" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxNjAgMTIwIj48cmVjdCB4PSIwIiB5PSIwIiB3aWR0aD0iMTYwIiBoZWlnaHQ9IjMwIiBmaWxsPSIjQUExNTFCIi8+PHJlY3QgeD0iMCIgeT0iMzAiIHdpZHRoPSIxNjAiIGhlaWdodD0iNjAiIGZpbGw9IiNGMUJGMDAiLz48cmVjdCB4PSIwIiB5PSI5MCIgd2lkdGg9IjE2MCIgaGVpZ2h0PSIzMCIgZmlsbD0iI0FBMTUxQiIvPjxyZWN0IHg9IjYwIiB5PSIzNCIgd2lkdGg9IjE0IiBoZWlnaHQ9IjUyIiBmaWxsPSIjQUExNTFCIi8+PHJlY3QgeD0iODYiIHk9IjM0IiB3aWR0aD0iMTQiIGhlaWdodD0iNTIiIGZpbGw9IiNBQTE1MUIiLz48cmVjdCB4PSI2MCIgeT0iMzQiIHdpZHRoPSI0MCIgaGVpZ2h0PSIxMCIgZmlsbD0iI0FBMTUxQiIvPjxyZWN0IHg9IjYwIiB5PSI3NiIgd2lkdGg9IjQwIiBoZWlnaHQ9IjEwIiBmaWxsPSIjQUExNTFCIi8+PC9zdmc+"/><div class="gloss"></div></div><div class="name">Spain</div></a><a class="btn" href="#Cape_Verde_top"><div class="badge"><img alt="Cape Verde" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxNjAgMTIwIj48cmVjdCB4PSIwIiB5PSIwIiB3aWR0aD0iMTYwIiBoZWlnaHQ9IjEyMCIgZmlsbD0iIzAwMzg5MyIvPjxyZWN0IHg9IjAiIHk9Ijc1IiB3aWR0aD0iMTYwIiBoZWlnaHQ9IjEwIiBmaWxsPSIjQ0YyMDI3Ii8+PHJlY3QgeD0iMCIgeT0iODUiIHdpZHRoPSIxNjAiIGhlaWdodD0iNSIgZmlsbD0id2hpdGUiLz48cmVjdCB4PSIwIiB5PSI5MCIgd2lkdGg9IjE2MCIgaGVpZ2h0PSIxMCIgZmlsbD0iI0NGMjAyNyIvPjxjaXJjbGUgY3g9IjgwIiBjeT0iMTAyIiByPSI0IiBmaWxsPSIjRjdEMTE2Ii8+PGNpcmNsZSBjeD0iNjEiIGN5PSI5NSIgcj0iNCIgZmlsbD0iI0Y3RDExNiIvPjxjaXJjbGUgY3g9IjQ5IiBjeT0iNzkiIHI9IjQiIGZpbGw9IiNGN0QxMTYiLz48Y2lyY2xlIGN4PSI0OSIgY3k9IjYwIiByPSI0IiBmaWxsPSIjRjdEMTE2Ii8+PGNpcmNsZSBjeD0iNjEiIGN5PSI0NCIgcj0iNCIgZmlsbD0iI0Y3RDExNiIvPjxjaXJjbGUgY3g9IjgwIiBjeT0iMzgiIHI9IjQiIGZpbGw9IiNGN0QxMTYiLz48Y2lyY2xlIGN4PSI5OCIgY3k9IjQ0IiByPSI0IiBmaWxsPSIjRjdEMTE2Ii8+PGNpcmNsZSBjeD0iMTEwIiBjeT0iNjAiIHI9IjQiIGZpbGw9IiNGN0QxMTYiLz48Y2lyY2xlIGN4PSIxMTAiIGN5PSI3OSIgcj0iNCIgZmlsbD0iI0Y3RDExNiIvPjxjaXJjbGUgY3g9Ijk4IiBjeT0iOTUiIHI9IjQiIGZpbGw9IiNGN0QxMTYiLz48L3N2Zz4="/><div class="gloss"></div></div><div class="name">Cape Verde</div></a><a class="btn" href="#Saudi_Arabia_top"><div class="badge"><img alt="Saudi Arabia" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxNjAgMTIwIj48cmVjdCB4PSIwIiB5PSIwIiB3aWR0aD0iMTYwIiBoZWlnaHQ9IjEyMCIgZmlsbD0iIzAwNkMzNSIvPjx0ZXh0IHg9IjgwIiB5PSI1NSIgZm9udC1zaXplPSI5IiBmaWxsPSJ3aGl0ZSIgdGV4dC1hbmNob3I9Im1pZGRsZSI+2YTYpyDYpdmE2Ycg2KXZhNinINin2YTZhNmHINmF2K3ZhdivINix2LPZiNmEINin2YTZhNmHPC90ZXh0PjxyZWN0IHg9IjU4IiB5PSI3MCIgd2lkdGg9IjQ0IiBoZWlnaHQ9IjMiIGZpbGw9IndoaXRlIi8+PHJlY3QgeD0iMTAyIiB5PSI3MCIgd2lkdGg9IjQiIGhlaWdodD0iMTAiIGZpbGw9IndoaXRlIi8+PC9zdmc+"/><div class="gloss"></div></div><div class="name">Saudi Arabia</div></a><a class="btn" href="#Uruguay_top"><div class="badge"><img alt="Uruguay" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxNjAgMTIwIj48cmVjdCB4PSIwIiB5PSIwIiB3aWR0aD0iMTYwIiBoZWlnaHQ9IjEyMCIgZmlsbD0id2hpdGUiLz48cmVjdCB4PSIwIiB5PSIxMyIgd2lkdGg9IjE2MCIgaGVpZ2h0PSIxMyIgZmlsbD0iIzUzOTdENiIvPjxyZWN0IHg9IjAiIHk9IjQwIiB3aWR0aD0iMTYwIiBoZWlnaHQ9IjEzIiBmaWxsPSIjNTM5N0Q2Ii8+PHJlY3QgeD0iMCIgeT0iNjYiIHdpZHRoPSIxNjAiIGhlaWdodD0iMTMiIGZpbGw9IiM1Mzk3RDYiLz48cmVjdCB4PSIwIiB5PSI5MyIgd2lkdGg9IjE2MCIgaGVpZ2h0PSIxMyIgZmlsbD0iIzUzOTdENiIvPjxyZWN0IHg9IjAiIHk9IjAiIHdpZHRoPSI1MyIgaGVpZ2h0PSI1MyIgZmlsbD0id2hpdGUiLz48Y2lyY2xlIGN4PSIyNiIgY3k9IjI2IiByPSIyMCIgZmlsbD0iI0Y1RDYwMCIvPjxsaW5lIHgxPSIyNiIgeTE9IjI2IiB4Mj0iNTIiIHkyPSIyNiIgc3Ryb2tlPSIjRjVENjAwIiBzdHJva2Utd2lkdGg9IjIiLz48bGluZSB4MT0iMjYiIHkxPSIyNiIgeDI9IjQ4IiB5Mj0iMzkiIHN0cm9rZT0iI0Y1RDYwMCIgc3Ryb2tlLXdpZHRoPSIyIi8+PGxpbmUgeDE9IjI2IiB5MT0iMjYiIHgyPSIzOSIgeTI9IjQ4IiBzdHJva2U9IiNGNUQ2MDAiIHN0cm9rZS13aWR0aD0iMiIvPjxsaW5lIHgxPSIyNiIgeTE9IjI2IiB4Mj0iMjYiIHkyPSI1MiIgc3Ryb2tlPSIjRjVENjAwIiBzdHJva2Utd2lkdGg9IjIiLz48bGluZSB4MT0iMjYiIHkxPSIyNiIgeDI9IjEzIiB5Mj0iNDgiIHN0cm9rZT0iI0Y1RDYwMCIgc3Ryb2tlLXdpZHRoPSIyIi8+PGxpbmUgeDE9IjI2IiB5MT0iMjYiIHgyPSIzIiB5Mj0iMzkiIHN0cm9rZT0iI0Y1RDYwMCIgc3Ryb2tlLXdpZHRoPSIyIi8+PGxpbmUgeDE9IjI2IiB5MT0iMjYiIHgyPSIwIiB5Mj0iMjYiIHN0cm9rZT0iI0Y1RDYwMCIgc3Ryb2tlLXdpZHRoPSIyIi8+PGxpbmUgeDE9IjI2IiB5MT0iMjYiIHgyPSIzIiB5Mj0iMTIiIHN0cm9rZT0iI0Y1RDYwMCIgc3Ryb2tlLXdpZHRoPSIyIi8+PGxpbmUgeDE9IjI2IiB5MT0iMjYiIHgyPSIxMiIgeTI9IjMiIHN0cm9rZT0iI0Y1RDYwMCIgc3Ryb2tlLXdpZHRoPSIyIi8+PGxpbmUgeDE9IjI2IiB5MT0iMjYiIHgyPSIyNSIgeTI9IjAiIHN0cm9rZT0iI0Y1RDYwMCIgc3Ryb2tlLXdpZHRoPSIyIi8+PGxpbmUgeDE9IjI2IiB5MT0iMjYiIHgyPSIzOSIgeTI9IjMiIHN0cm9rZT0iI0Y1RDYwMCIgc3Ryb2tlLXdpZHRoPSIyIi8+PGxpbmUgeDE9IjI2IiB5MT0iMjYiIHgyPSI0OCIgeTI9IjEyIiBzdHJva2U9IiNGNUQ2MDAiIHN0cm9rZS13aWR0aD0iMiIvPjwvc3ZnPg=="/><div class="gloss"></div></div><div class="name">Uruguay</div></a></div></div><div class="group-block"><div class="group-label">Group I</div><div class="group-2x2"><a class="btn" href="#France_top"><div class="badge"><img alt="France" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxNjAgMTIwIj48cmVjdCB4PSIwIiB5PSIwIiB3aWR0aD0iNTMiIGhlaWdodD0iMTIwIiBmaWxsPSIjMDAyMzk1Ii8+PHJlY3QgeD0iNTMiIHk9IjAiIHdpZHRoPSI1MyIgaGVpZ2h0PSIxMjAiIGZpbGw9IndoaXRlIi8+PHJlY3QgeD0iMTA2IiB5PSIwIiB3aWR0aD0iNTMiIGhlaWdodD0iMTIwIiBmaWxsPSIjRUQyOTM5Ii8+PC9zdmc+"/><div class="gloss"></div></div><div class="name">France</div></a><a class="btn" href="#Senegal_top"><div class="badge"><img alt="Senegal" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxNjAgMTIwIj48cmVjdCB4PSIwIiB5PSIwIiB3aWR0aD0iNTMiIGhlaWdodD0iMTIwIiBmaWxsPSIjMDA4NTNGIi8+PHJlY3QgeD0iNTMiIHk9IjAiIHdpZHRoPSI1MyIgaGVpZ2h0PSIxMjAiIGZpbGw9IiNGREVGNDIiLz48cmVjdCB4PSIxMDYiIHk9IjAiIHdpZHRoPSI1MyIgaGVpZ2h0PSIxMjAiIGZpbGw9IiNFMzFCMjMiLz48cG9seWdvbiBwb2ludHM9IjgwLDQ0IDg1LDU2IDk2LDU2IDg4LDY0IDkwLDc2IDgwLDcwIDcwLDc2IDcyLDY0IDY0LDU2IDc1LDU2IiBmaWxsPSIjMDA4NTNGIi8+PC9zdmc+"/><div class="gloss"></div></div><div class="name">Senegal</div></a><a class="btn" href="#Iraq_top"><div class="badge"><img alt="Iraq" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxNjAgMTIwIj48cmVjdCB4PSIwIiB5PSIwIiB3aWR0aD0iMTYwIiBoZWlnaHQ9IjQwIiBmaWxsPSIjQ0UxMTI2Ii8+PHJlY3QgeD0iMCIgeT0iNDAiIHdpZHRoPSIxNjAiIGhlaWdodD0iNDAiIGZpbGw9IndoaXRlIi8+PHJlY3QgeD0iMCIgeT0iODAiIHdpZHRoPSIxNjAiIGhlaWdodD0iNDAiIGZpbGw9IiMwMDAwMDAiLz48dGV4dCB4PSI4MCIgeT0iNjQiIGZvbnQtc2l6ZT0iMTAiIGZpbGw9IiMwMDdBM0QiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtd2VpZ2h0PSJib2xkIj7Yp9mE2YTZhyDYo9mD2KjYsTwvdGV4dD48L3N2Zz4="/><div class="gloss"></div></div><div class="name">Iraq</div></a><a class="btn" href="#Norway_top"><div class="badge"><img alt="Norway" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxNjAgMTIwIj48cmVjdCB4PSIwIiB5PSIwIiB3aWR0aD0iMTYwIiBoZWlnaHQ9IjEyMCIgZmlsbD0iI0VGMkIyRCIvPjxyZWN0IHg9IjQ1IiB5PSIwIiB3aWR0aD0iMTYiIGhlaWdodD0iMTIwIiBmaWxsPSJ3aGl0ZSIvPjxyZWN0IHg9IjAiIHk9IjUyIiB3aWR0aD0iMTYwIiBoZWlnaHQ9IjE2IiBmaWxsPSJ3aGl0ZSIvPjxyZWN0IHg9IjQ5IiB5PSIwIiB3aWR0aD0iOCIgaGVpZ2h0PSIxMjAiIGZpbGw9IiMwMDI4NjgiLz48cmVjdCB4PSIwIiB5PSI1NiIgd2lkdGg9IjE2MCIgaGVpZ2h0PSI4IiBmaWxsPSIjMDAyODY4Ii8+PC9zdmc+"/><div class="gloss"></div></div><div class="name">Norway</div></a></div></div><div class="group-block"><div class="group-label">Group J</div><div class="group-2x2"><a class="btn" href="#Argentina_top"><div class="badge"><img alt="Argentina" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxNjAgMTIwIj48cmVjdCB4PSIwIiB5PSIwIiB3aWR0aD0iMTYwIiBoZWlnaHQ9IjQwIiBmaWxsPSIjNzRBQ0RGIi8+PHJlY3QgeD0iMCIgeT0iNDAiIHdpZHRoPSIxNjAiIGhlaWdodD0iNDAiIGZpbGw9IndoaXRlIi8+PHJlY3QgeD0iMCIgeT0iODAiIHdpZHRoPSIxNjAiIGhlaWdodD0iNDAiIGZpbGw9IiM3NEFDREYiLz48Y2lyY2xlIGN4PSI4MCIgY3k9IjYwIiByPSIxNCIgZmlsbD0iI0Y2QjQwRSIvPjxjaXJjbGUgY3g9IjgwIiBjeT0iNjAiIHI9IjEwIiBmaWxsPSIjODQzNTExIi8+PC9zdmc+"/><div class="gloss"></div></div><div class="name">Argentina</div></a><a class="btn" href="#Algeria_top"><div class="badge"><img alt="Algeria" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxNjAgMTIwIj48cmVjdCB4PSIwIiB5PSIwIiB3aWR0aD0iMTYwIiBoZWlnaHQ9IjEyMCIgZmlsbD0iIzAwNjIzMyIvPjxyZWN0IHg9IjAiIHk9IjAiIHdpZHRoPSI4MCIgaGVpZ2h0PSIxMjAiIGZpbGw9IndoaXRlIi8+PGNpcmNsZSBjeD0iNzYiIGN5PSI2MCIgcj0iMjQiIGZpbGw9IiNEMjEwMzQiLz48Y2lyY2xlIGN4PSI4MyIgY3k9IjYwIiByPSIyMCIgZmlsbD0iIzAwNjIzMyIvPjxwb2x5Z29uIHBvaW50cz0iOTIsNTMgOTQsNjAgOTIsNjcgOTgsNjIgMTA0LDYwIDk4LDU4IiBmaWxsPSIjRDIxMDM0Ii8+PC9zdmc+"/><div class="gloss"></div></div><div class="name">Algeria</div></a><a class="btn" href="#Austria_top"><div class="badge"><img alt="Austria" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxNjAgMTIwIj48cmVjdCB4PSIwIiB5PSIwIiB3aWR0aD0iMTYwIiBoZWlnaHQ9IjQwIiBmaWxsPSIjRUQyOTM5Ii8+PHJlY3QgeD0iMCIgeT0iNDAiIHdpZHRoPSIxNjAiIGhlaWdodD0iNDAiIGZpbGw9IndoaXRlIi8+PHJlY3QgeD0iMCIgeT0iODAiIHdpZHRoPSIxNjAiIGhlaWdodD0iNDAiIGZpbGw9IiNFRDI5MzkiLz48L3N2Zz4="/><div class="gloss"></div></div><div class="name">Austria</div></a><a class="btn" href="#Jordan_top"><div class="badge"><img alt="Jordan" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxNjAgMTIwIj48cmVjdCB4PSIwIiB5PSIwIiB3aWR0aD0iMTYwIiBoZWlnaHQ9IjQwIiBmaWxsPSIjMDA3QTNEIi8+PHJlY3QgeD0iMCIgeT0iNDAiIHdpZHRoPSIxNjAiIGhlaWdodD0iNDAiIGZpbGw9IndoaXRlIi8+PHJlY3QgeD0iMCIgeT0iODAiIHdpZHRoPSIxNjAiIGhlaWdodD0iNDAiIGZpbGw9IiMwMDAwMDAiLz48cG9seWdvbiBwb2ludHM9IjAsMCA4MCw2MCAwLDEyMCIgZmlsbD0iI0NFMTEyNiIvPjxjaXJjbGUgY3g9IjQ0IiBjeT0iNjAiIHI9IjgiIGZpbGw9IndoaXRlIi8+PHBvbHlnb24gcG9pbnRzPSI0NCw1NCA0Niw2MCA0NCw2NiA1MCw2MiA1NCw2MCA1MCw1OCIgZmlsbD0id2hpdGUiLz48L3N2Zz4="/><div class="gloss"></div></div><div class="name">Jordan</div></a></div></div><div class="group-block"><div class="group-label">Group K</div><div class="group-2x2"><a class="btn" href="#Portugal_top"><div class="badge"><img alt="Portugal" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxNjAgMTIwIj48cmVjdCB4PSIwIiB5PSIwIiB3aWR0aD0iNjQiIGhlaWdodD0iMTIwIiBmaWxsPSIjMDA2NjAwIi8+PHJlY3QgeD0iNjQiIHk9IjAiIHdpZHRoPSI5NiIgaGVpZ2h0PSIxMjAiIGZpbGw9IiNGRjAwMDAiLz48Y2lyY2xlIGN4PSI2NCIgY3k9IjYwIiByPSIxOCIgZmlsbD0iI0ZGRkYwMCIvPjxjaXJjbGUgY3g9IjY0IiBjeT0iNjAiIHI9IjEyIiBmaWxsPSIjMDAzMzk5Ii8+PHJlY3QgeD0iNTIiIHk9IjQ4IiB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIGZpbGw9Im5vbmUiLz48L3N2Zz4="/><div class="gloss"></div></div><div class="name">Portugal</div></a><a class="btn" href="#DR_Congo_top"><div class="badge"><img alt="DR Congo" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxNjAgMTIwIj48cmVjdCB4PSIwIiB5PSIwIiB3aWR0aD0iMTYwIiBoZWlnaHQ9IjEyMCIgZmlsbD0iIzAwN0ZGRiIvPjxwb2x5Z29uIHBvaW50cz0iMCwxMjAgMTYwLDAgMTYwLDI0IDAsMTIwIiBmaWxsPSIjRjdENjE4Ii8+PHBvbHlnb24gcG9pbnRzPSIwLDEyMCAxNjAsMCAwLDAiIGZpbGw9IiNDRTEwMjAiLz48cG9seWdvbiBwb2ludHM9IjAsMTIwIDE2MCwxMjAgMTYwLDk2IiBmaWxsPSIjQ0UxMDIwIi8+PGNpcmNsZSBjeD0iMzAiIGN5PSIyNSIgcj0iMTIiIGZpbGw9IiNGN0Q2MTgiLz48cG9seWdvbiBwb2ludHM9IjMwLDEzIDMyLDIwIDMwLDI3IDM2LDIyIDQyLDIwIDM2LDE4IiBmaWxsPSIjRjdENjE4Ii8+PC9zdmc+"/><div class="gloss"></div></div><div class="name">DR Congo</div></a><a class="btn" href="#Uzbekistan_top"><div class="badge"><img alt="Uzbekistan" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxNjAgMTIwIj48cmVjdCB4PSIwIiB5PSIwIiB3aWR0aD0iMTYwIiBoZWlnaHQ9IjQwIiBmaWxsPSIjMUVCNTNBIi8+PHJlY3QgeD0iMCIgeT0iNDAiIHdpZHRoPSIxNjAiIGhlaWdodD0iNDAiIGZpbGw9IndoaXRlIi8+PHJlY3QgeD0iMCIgeT0iODAiIHdpZHRoPSIxNjAiIGhlaWdodD0iNDAiIGZpbGw9IiMwMDk5QjUiLz48cmVjdCB4PSIwIiB5PSIzOCIgd2lkdGg9IjE2MCIgaGVpZ2h0PSI0IiBmaWxsPSIjQ0UxMTI2Ii8+PHJlY3QgeD0iMCIgeT0iNzgiIHdpZHRoPSIxNjAiIGhlaWdodD0iNCIgZmlsbD0iI0NFMTEyNiIvPjxjaXJjbGUgY3g9IjI0IiBjeT0iMTYiIHI9IjEyIiBmaWxsPSJ3aGl0ZSIvPjxjaXJjbGUgY3g9IjMwIiBjeT0iMTYiIHI9IjEwIiBmaWxsPSIjMDA5OUI1Ii8+PGNpcmNsZSBjeD0iNDYiIGN5PSI4IiByPSIyIiBmaWxsPSJ3aGl0ZSIvPjxjaXJjbGUgY3g9IjU4IiBjeT0iOCIgcj0iMiIgZmlsbD0id2hpdGUiLz48Y2lyY2xlIGN4PSI3MCIgY3k9IjgiIHI9IjIiIGZpbGw9IndoaXRlIi8+PGNpcmNsZSBjeD0iNDYiIGN5PSIxOCIgcj0iMiIgZmlsbD0id2hpdGUiLz48Y2lyY2xlIGN4PSI1OCIgY3k9IjE4IiByPSIyIiBmaWxsPSJ3aGl0ZSIvPjxjaXJjbGUgY3g9IjcwIiBjeT0iMTgiIHI9IjIiIGZpbGw9IndoaXRlIi8+PGNpcmNsZSBjeD0iNDYiIGN5PSIyOCIgcj0iMiIgZmlsbD0id2hpdGUiLz48Y2lyY2xlIGN4PSI1OCIgY3k9IjI4IiByPSIyIiBmaWxsPSJ3aGl0ZSIvPjxjaXJjbGUgY3g9IjcwIiBjeT0iMjgiIHI9IjIiIGZpbGw9IndoaXRlIi8+PC9zdmc+"/><div class="gloss"></div></div><div class="name">Uzbekistan</div></a><a class="btn" href="#Colombia_top"><div class="badge"><img alt="Colombia" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxNjAgMTIwIj48cmVjdCB4PSIwIiB5PSIwIiB3aWR0aD0iMTYwIiBoZWlnaHQ9IjYwIiBmaWxsPSIjRkNEMTE2Ii8+PHJlY3QgeD0iMCIgeT0iNjAiIHdpZHRoPSIxNjAiIGhlaWdodD0iMzAiIGZpbGw9IiMwMDMwODciLz48cmVjdCB4PSIwIiB5PSI5MCIgd2lkdGg9IjE2MCIgaGVpZ2h0PSIzMCIgZmlsbD0iI0NFMTEyNiIvPjwvc3ZnPg=="/><div class="gloss"></div></div><div class="name">Colombia</div></a></div></div><div class="group-block"><div class="group-label">Group L</div><div class="group-2x2"><a class="btn" href="#England_top"><div class="badge"><img alt="England" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxNjAgMTIwIj48cmVjdCB4PSIwIiB5PSIwIiB3aWR0aD0iMTYwIiBoZWlnaHQ9IjEyMCIgZmlsbD0id2hpdGUiLz48cmVjdCB4PSI3MCIgeT0iMCIgd2lkdGg9IjIwIiBoZWlnaHQ9IjEyMCIgZmlsbD0iI0NFMTEyNCIvPjxyZWN0IHg9IjAiIHk9IjUwIiB3aWR0aD0iMTYwIiBoZWlnaHQ9IjIwIiBmaWxsPSIjQ0UxMTI0Ii8+PC9zdmc+"/><div class="gloss"></div></div><div class="name">England</div></a><a class="btn" href="#Croatia_top"><div class="badge"><img alt="Croatia" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxNjAgMTIwIj48cmVjdCB4PSIwIiB5PSIwIiB3aWR0aD0iMTYwIiBoZWlnaHQ9IjQwIiBmaWxsPSIjRkYwMDAwIi8+PHJlY3QgeD0iMCIgeT0iNDAiIHdpZHRoPSIxNjAiIGhlaWdodD0iNDAiIGZpbGw9IndoaXRlIi8+PHJlY3QgeD0iMCIgeT0iODAiIHdpZHRoPSIxNjAiIGhlaWdodD0iNDAiIGZpbGw9IiMwMDM4QTgiLz48cmVjdCB4PSI2NSIgeT0iNTIiIHdpZHRoPSI2IiBoZWlnaHQ9IjYiIGZpbGw9IiNGRjAwMDAiLz48cmVjdCB4PSI3MSIgeT0iNTIiIHdpZHRoPSI2IiBoZWlnaHQ9IjYiIGZpbGw9IndoaXRlIi8+PHJlY3QgeD0iNzciIHk9IjUyIiB3aWR0aD0iNiIgaGVpZ2h0PSI2IiBmaWxsPSIjRkYwMDAwIi8+PHJlY3QgeD0iODMiIHk9IjUyIiB3aWR0aD0iNiIgaGVpZ2h0PSI2IiBmaWxsPSJ3aGl0ZSIvPjxyZWN0IHg9Ijg5IiB5PSI1MiIgd2lkdGg9IjYiIGhlaWdodD0iNiIgZmlsbD0iI0ZGMDAwMCIvPjxyZWN0IHg9IjY1IiB5PSI1OCIgd2lkdGg9IjYiIGhlaWdodD0iNiIgZmlsbD0id2hpdGUiLz48cmVjdCB4PSI3MSIgeT0iNTgiIHdpZHRoPSI2IiBoZWlnaHQ9IjYiIGZpbGw9IiNGRjAwMDAiLz48cmVjdCB4PSI3NyIgeT0iNTgiIHdpZHRoPSI2IiBoZWlnaHQ9IjYiIGZpbGw9IndoaXRlIi8+PHJlY3QgeD0iODMiIHk9IjU4IiB3aWR0aD0iNiIgaGVpZ2h0PSI2IiBmaWxsPSIjRkYwMDAwIi8+PHJlY3QgeD0iODkiIHk9IjU4IiB3aWR0aD0iNiIgaGVpZ2h0PSI2IiBmaWxsPSJ3aGl0ZSIvPjxyZWN0IHg9IjY1IiB5PSI2NCIgd2lkdGg9IjYiIGhlaWdodD0iNiIgZmlsbD0iI0ZGMDAwMCIvPjxyZWN0IHg9IjcxIiB5PSI2NCIgd2lkdGg9IjYiIGhlaWdodD0iNiIgZmlsbD0id2hpdGUiLz48cmVjdCB4PSI3NyIgeT0iNjQiIHdpZHRoPSI2IiBoZWlnaHQ9IjYiIGZpbGw9IiNGRjAwMDAiLz48cmVjdCB4PSI4MyIgeT0iNjQiIHdpZHRoPSI2IiBoZWlnaHQ9IjYiIGZpbGw9IndoaXRlIi8+PHJlY3QgeD0iODkiIHk9IjY0IiB3aWR0aD0iNiIgaGVpZ2h0PSI2IiBmaWxsPSIjRkYwMDAwIi8+PHJlY3QgeD0iNjUiIHk9IjcwIiB3aWR0aD0iNiIgaGVpZ2h0PSI2IiBmaWxsPSJ3aGl0ZSIvPjxyZWN0IHg9IjcxIiB5PSI3MCIgd2lkdGg9IjYiIGhlaWdodD0iNiIgZmlsbD0iI0ZGMDAwMCIvPjxyZWN0IHg9Ijc3IiB5PSI3MCIgd2lkdGg9IjYiIGhlaWdodD0iNiIgZmlsbD0id2hpdGUiLz48cmVjdCB4PSI4MyIgeT0iNzAiIHdpZHRoPSI2IiBoZWlnaHQ9IjYiIGZpbGw9IiNGRjAwMDAiLz48cmVjdCB4PSI4OSIgeT0iNzAiIHdpZHRoPSI2IiBoZWlnaHQ9IjYiIGZpbGw9IndoaXRlIi8+PHJlY3QgeD0iNjUiIHk9Ijc2IiB3aWR0aD0iNiIgaGVpZ2h0PSI2IiBmaWxsPSIjRkYwMDAwIi8+PHJlY3QgeD0iNzEiIHk9Ijc2IiB3aWR0aD0iNiIgaGVpZ2h0PSI2IiBmaWxsPSJ3aGl0ZSIvPjxyZWN0IHg9Ijc3IiB5PSI3NiIgd2lkdGg9IjYiIGhlaWdodD0iNiIgZmlsbD0iI0ZGMDAwMCIvPjxyZWN0IHg9IjgzIiB5PSI3NiIgd2lkdGg9IjYiIGhlaWdodD0iNiIgZmlsbD0id2hpdGUiLz48cmVjdCB4PSI4OSIgeT0iNzYiIHdpZHRoPSI2IiBoZWlnaHQ9IjYiIGZpbGw9IiNGRjAwMDAiLz48L3N2Zz4="/><div class="gloss"></div></div><div class="name">Croatia</div></a><a class="btn" href="#Ghana_top"><div class="badge"><img alt="Ghana" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxNjAgMTIwIj48cmVjdCB4PSIwIiB5PSIwIiB3aWR0aD0iMTYwIiBoZWlnaHQ9IjQwIiBmaWxsPSIjMDA2QjNGIi8+PHJlY3QgeD0iMCIgeT0iNDAiIHdpZHRoPSIxNjAiIGhlaWdodD0iNDAiIGZpbGw9IiNGQ0QxMTYiLz48cmVjdCB4PSIwIiB5PSI4MCIgd2lkdGg9IjE2MCIgaGVpZ2h0PSI0MCIgZmlsbD0iI0NFMTEyNiIvPjxwb2x5Z29uIHBvaW50cz0iODAsNDIgODYsNTcgMTAwLDU3IDkwLDY2IDk0LDgxIDgwLDcyIDY2LDgxIDcwLDY2IDYwLDU3IDc0LDU3IiBmaWxsPSIjMDAwMDAwIi8+PC9zdmc+"/><div class="gloss"></div></div><div class="name">Ghana</div></a><a class="btn" href="#Panama_top"><div class="badge"><img alt="Panama" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxNjAgMTIwIj48cmVjdCB4PSIwIiB5PSIwIiB3aWR0aD0iODAiIGhlaWdodD0iNjAiIGZpbGw9IndoaXRlIi8+PHJlY3QgeD0iODAiIHk9IjAiIHdpZHRoPSI4MCIgaGVpZ2h0PSI2MCIgZmlsbD0iI0QyMTAzNCIvPjxyZWN0IHg9IjAiIHk9IjYwIiB3aWR0aD0iODAiIGhlaWdodD0iNjAiIGZpbGw9IiMwMDUyOTMiLz48cmVjdCB4PSI4MCIgeT0iNjAiIHdpZHRoPSI4MCIgaGVpZ2h0PSI2MCIgZmlsbD0id2hpdGUiLz48cG9seWdvbiBwb2ludHM9IjQwLDE2IDQ1LDI4IDU0LDI4IDQ4LDM2IDUwLDQ2IDQwLDQwIDMwLDQ2IDMyLDM2IDI2LDI4IDM1LDI4IiBmaWxsPSIjMDA1MjkzIi8+PHBvbHlnb24gcG9pbnRzPSIxMjAsNzYgMTI1LDg4IDEzNCw4OCAxMjgsOTYgMTMwLDEwNiAxMjAsMTAwIDExMCwxMDYgMTEyLDk2IDEwNiw4OCAxMTUsODgiIGZpbGw9IiNEMjEwMzQiLz48L3N2Zz4="/><div class="gloss"></div></div><div class="name">Panama</div></a></div></div></div>
 <!-- ══ ALL 48 SQUAD PAGES ══ -->
 <span id="Algeria_az"></span>
 <span id="Algeria_caps"></span>
@@ -906,7 +928,7 @@ footer { text-align:center; padding:20px 16px 32px; font-size:10px; color:rgba(2
 </div>
 <div class="action-bar">
 <div class="action-left">
-<a class="pill pill-back" href="#home_top">← Back</a>
+<a class="pill pill-back" id="back-btn" href="#home_top">← Back</a>
 <a class="pill pill-help" href="#Algeria_info">?</a>
 </div>
 <div class="action-right">
@@ -920,7 +942,7 @@ footer { text-align:center; padding:20px 16px 32px; font-size:10px; color:rgba(2
 <div class="overlay-box">
 <div class="overlay-title">About This Data</div>
 <div class="overlay-text">Squads are as per the first announced squads - they could change based on injuries or other reasons. Data is sourced from World Soccer, Wikipedia and various internet sites, and should reflect status upto June 1st, 2026</div>
-<a class="overlay-close" href="#Algeria_top">Tap to close</a>
+<a class="overlay-close" href="#Algeria_top">&#x2715;</a>
 </div>
 </div>
 <div class="content">
@@ -953,7 +975,7 @@ footer { text-align:center; padding:20px 16px 32px; font-size:10px; color:rgba(2
 </div>
 <div class="action-bar">
 <div class="action-left">
-<a class="pill pill-back" href="#home_top">← Back</a>
+<a class="pill pill-back" id="back-btn" href="#home_top">← Back</a>
 <a class="pill pill-help" href="#Argentina_info">?</a>
 </div>
 <div class="action-right">
@@ -967,7 +989,7 @@ footer { text-align:center; padding:20px 16px 32px; font-size:10px; color:rgba(2
 <div class="overlay-box">
 <div class="overlay-title">About This Data</div>
 <div class="overlay-text">Squads are as per the first announced squads - they could change based on injuries or other reasons. Data is sourced from World Soccer, Wikipedia and various internet sites, and should reflect status upto June 1st, 2026</div>
-<a class="overlay-close" href="#Argentina_top">Tap to close</a>
+<a class="overlay-close" href="#Argentina_top">&#x2715;</a>
 </div>
 </div>
 <div class="content">
@@ -1000,7 +1022,7 @@ footer { text-align:center; padding:20px 16px 32px; font-size:10px; color:rgba(2
 </div>
 <div class="action-bar">
 <div class="action-left">
-<a class="pill pill-back" href="#home_top">← Back</a>
+<a class="pill pill-back" id="back-btn" href="#home_top">← Back</a>
 <a class="pill pill-help" href="#Australia_info">?</a>
 </div>
 <div class="action-right">
@@ -1014,7 +1036,7 @@ footer { text-align:center; padding:20px 16px 32px; font-size:10px; color:rgba(2
 <div class="overlay-box">
 <div class="overlay-title">About This Data</div>
 <div class="overlay-text">Squads are as per the first announced squads - they could change based on injuries or other reasons. Data is sourced from World Soccer, Wikipedia and various internet sites, and should reflect status upto June 1st, 2026</div>
-<a class="overlay-close" href="#Australia_top">Tap to close</a>
+<a class="overlay-close" href="#Australia_top">&#x2715;</a>
 </div>
 </div>
 <div class="content">
@@ -1047,7 +1069,7 @@ footer { text-align:center; padding:20px 16px 32px; font-size:10px; color:rgba(2
 </div>
 <div class="action-bar">
 <div class="action-left">
-<a class="pill pill-back" href="#home_top">← Back</a>
+<a class="pill pill-back" id="back-btn" href="#home_top">← Back</a>
 <a class="pill pill-help" href="#Austria_info">?</a>
 </div>
 <div class="action-right">
@@ -1061,7 +1083,7 @@ footer { text-align:center; padding:20px 16px 32px; font-size:10px; color:rgba(2
 <div class="overlay-box">
 <div class="overlay-title">About This Data</div>
 <div class="overlay-text">Squads are as per the first announced squads - they could change based on injuries or other reasons. Data is sourced from World Soccer, Wikipedia and various internet sites, and should reflect status upto June 1st, 2026</div>
-<a class="overlay-close" href="#Austria_top">Tap to close</a>
+<a class="overlay-close" href="#Austria_top">&#x2715;</a>
 </div>
 </div>
 <div class="content">
@@ -1094,7 +1116,7 @@ footer { text-align:center; padding:20px 16px 32px; font-size:10px; color:rgba(2
 </div>
 <div class="action-bar">
 <div class="action-left">
-<a class="pill pill-back" href="#home_top">← Back</a>
+<a class="pill pill-back" id="back-btn" href="#home_top">← Back</a>
 <a class="pill pill-help" href="#Belgium_info">?</a>
 </div>
 <div class="action-right">
@@ -1108,7 +1130,7 @@ footer { text-align:center; padding:20px 16px 32px; font-size:10px; color:rgba(2
 <div class="overlay-box">
 <div class="overlay-title">About This Data</div>
 <div class="overlay-text">Squads are as per the first announced squads - they could change based on injuries or other reasons. Data is sourced from World Soccer, Wikipedia and various internet sites, and should reflect status upto June 1st, 2026</div>
-<a class="overlay-close" href="#Belgium_top">Tap to close</a>
+<a class="overlay-close" href="#Belgium_top">&#x2715;</a>
 </div>
 </div>
 <div class="content">
@@ -1141,7 +1163,7 @@ footer { text-align:center; padding:20px 16px 32px; font-size:10px; color:rgba(2
 </div>
 <div class="action-bar">
 <div class="action-left">
-<a class="pill pill-back" href="#home_top">← Back</a>
+<a class="pill pill-back" id="back-btn" href="#home_top">← Back</a>
 <a class="pill pill-help" href="#Bosnia___Herzegovina_info">?</a>
 </div>
 <div class="action-right">
@@ -1155,7 +1177,7 @@ footer { text-align:center; padding:20px 16px 32px; font-size:10px; color:rgba(2
 <div class="overlay-box">
 <div class="overlay-title">About This Data</div>
 <div class="overlay-text">Squads are as per the first announced squads - they could change based on injuries or other reasons. Data is sourced from World Soccer, Wikipedia and various internet sites, and should reflect status upto June 1st, 2026</div>
-<a class="overlay-close" href="#Bosnia___Herzegovina_top">Tap to close</a>
+<a class="overlay-close" href="#Bosnia___Herzegovina_top">&#x2715;</a>
 </div>
 </div>
 <div class="content">
@@ -1188,7 +1210,7 @@ footer { text-align:center; padding:20px 16px 32px; font-size:10px; color:rgba(2
 </div>
 <div class="action-bar">
 <div class="action-left">
-<a class="pill pill-back" href="#home_top">← Back</a>
+<a class="pill pill-back" id="back-btn" href="#home_top">← Back</a>
 <a class="pill pill-help" href="#Brazil_info">?</a>
 </div>
 <div class="action-right">
@@ -1202,7 +1224,7 @@ footer { text-align:center; padding:20px 16px 32px; font-size:10px; color:rgba(2
 <div class="overlay-box">
 <div class="overlay-title">About This Data</div>
 <div class="overlay-text">Squads are as per the first announced squads - they could change based on injuries or other reasons. Data is sourced from World Soccer, Wikipedia and various internet sites, and should reflect status upto June 1st, 2026</div>
-<a class="overlay-close" href="#Brazil_top">Tap to close</a>
+<a class="overlay-close" href="#Brazil_top">&#x2715;</a>
 </div>
 </div>
 <div class="content">
@@ -1235,7 +1257,7 @@ footer { text-align:center; padding:20px 16px 32px; font-size:10px; color:rgba(2
 </div>
 <div class="action-bar">
 <div class="action-left">
-<a class="pill pill-back" href="#home_top">← Back</a>
+<a class="pill pill-back" id="back-btn" href="#home_top">← Back</a>
 <a class="pill pill-help" href="#Canada_info">?</a>
 </div>
 <div class="action-right">
@@ -1249,7 +1271,7 @@ footer { text-align:center; padding:20px 16px 32px; font-size:10px; color:rgba(2
 <div class="overlay-box">
 <div class="overlay-title">About This Data</div>
 <div class="overlay-text">Squads are as per the first announced squads - they could change based on injuries or other reasons. Data is sourced from World Soccer, Wikipedia and various internet sites, and should reflect status upto June 1st, 2026</div>
-<a class="overlay-close" href="#Canada_top">Tap to close</a>
+<a class="overlay-close" href="#Canada_top">&#x2715;</a>
 </div>
 </div>
 <div class="content">
@@ -1282,7 +1304,7 @@ footer { text-align:center; padding:20px 16px 32px; font-size:10px; color:rgba(2
 </div>
 <div class="action-bar">
 <div class="action-left">
-<a class="pill pill-back" href="#home_top">← Back</a>
+<a class="pill pill-back" id="back-btn" href="#home_top">← Back</a>
 <a class="pill pill-help" href="#Cape_Verde_info">?</a>
 </div>
 <div class="action-right">
@@ -1296,7 +1318,7 @@ footer { text-align:center; padding:20px 16px 32px; font-size:10px; color:rgba(2
 <div class="overlay-box">
 <div class="overlay-title">About This Data</div>
 <div class="overlay-text">Squads are as per the first announced squads - they could change based on injuries or other reasons. Data is sourced from World Soccer, Wikipedia and various internet sites, and should reflect status upto June 1st, 2026</div>
-<a class="overlay-close" href="#Cape_Verde_top">Tap to close</a>
+<a class="overlay-close" href="#Cape_Verde_top">&#x2715;</a>
 </div>
 </div>
 <div class="content">
@@ -1329,7 +1351,7 @@ footer { text-align:center; padding:20px 16px 32px; font-size:10px; color:rgba(2
 </div>
 <div class="action-bar">
 <div class="action-left">
-<a class="pill pill-back" href="#home_top">← Back</a>
+<a class="pill pill-back" id="back-btn" href="#home_top">← Back</a>
 <a class="pill pill-help" href="#Colombia_info">?</a>
 </div>
 <div class="action-right">
@@ -1343,7 +1365,7 @@ footer { text-align:center; padding:20px 16px 32px; font-size:10px; color:rgba(2
 <div class="overlay-box">
 <div class="overlay-title">About This Data</div>
 <div class="overlay-text">Squads are as per the first announced squads - they could change based on injuries or other reasons. Data is sourced from World Soccer, Wikipedia and various internet sites, and should reflect status upto June 1st, 2026</div>
-<a class="overlay-close" href="#Colombia_top">Tap to close</a>
+<a class="overlay-close" href="#Colombia_top">&#x2715;</a>
 </div>
 </div>
 <div class="content">
@@ -1376,7 +1398,7 @@ footer { text-align:center; padding:20px 16px 32px; font-size:10px; color:rgba(2
 </div>
 <div class="action-bar">
 <div class="action-left">
-<a class="pill pill-back" href="#home_top">← Back</a>
+<a class="pill pill-back" id="back-btn" href="#home_top">← Back</a>
 <a class="pill pill-help" href="#Croatia_info">?</a>
 </div>
 <div class="action-right">
@@ -1390,7 +1412,7 @@ footer { text-align:center; padding:20px 16px 32px; font-size:10px; color:rgba(2
 <div class="overlay-box">
 <div class="overlay-title">About This Data</div>
 <div class="overlay-text">Squads are as per the first announced squads - they could change based on injuries or other reasons. Data is sourced from World Soccer, Wikipedia and various internet sites, and should reflect status upto June 1st, 2026</div>
-<a class="overlay-close" href="#Croatia_top">Tap to close</a>
+<a class="overlay-close" href="#Croatia_top">&#x2715;</a>
 </div>
 </div>
 <div class="content">
@@ -1423,7 +1445,7 @@ footer { text-align:center; padding:20px 16px 32px; font-size:10px; color:rgba(2
 </div>
 <div class="action-bar">
 <div class="action-left">
-<a class="pill pill-back" href="#home_top">← Back</a>
+<a class="pill pill-back" id="back-btn" href="#home_top">← Back</a>
 <a class="pill pill-help" href="#Curacao_info">?</a>
 </div>
 <div class="action-right">
@@ -1437,7 +1459,7 @@ footer { text-align:center; padding:20px 16px 32px; font-size:10px; color:rgba(2
 <div class="overlay-box">
 <div class="overlay-title">About This Data</div>
 <div class="overlay-text">Squads are as per the first announced squads - they could change based on injuries or other reasons. Data is sourced from World Soccer, Wikipedia and various internet sites, and should reflect status upto June 1st, 2026</div>
-<a class="overlay-close" href="#Curacao_top">Tap to close</a>
+<a class="overlay-close" href="#Curacao_top">&#x2715;</a>
 </div>
 </div>
 <div class="content">
@@ -1470,7 +1492,7 @@ footer { text-align:center; padding:20px 16px 32px; font-size:10px; color:rgba(2
 </div>
 <div class="action-bar">
 <div class="action-left">
-<a class="pill pill-back" href="#home_top">← Back</a>
+<a class="pill pill-back" id="back-btn" href="#home_top">← Back</a>
 <a class="pill pill-help" href="#Czech_Republic_info">?</a>
 </div>
 <div class="action-right">
@@ -1484,7 +1506,7 @@ footer { text-align:center; padding:20px 16px 32px; font-size:10px; color:rgba(2
 <div class="overlay-box">
 <div class="overlay-title">About This Data</div>
 <div class="overlay-text">Squads are as per the first announced squads - they could change based on injuries or other reasons. Data is sourced from World Soccer, Wikipedia and various internet sites, and should reflect status upto June 1st, 2026</div>
-<a class="overlay-close" href="#Czech_Republic_top">Tap to close</a>
+<a class="overlay-close" href="#Czech_Republic_top">&#x2715;</a>
 </div>
 </div>
 <div class="content">
@@ -1517,7 +1539,7 @@ footer { text-align:center; padding:20px 16px 32px; font-size:10px; color:rgba(2
 </div>
 <div class="action-bar">
 <div class="action-left">
-<a class="pill pill-back" href="#home_top">← Back</a>
+<a class="pill pill-back" id="back-btn" href="#home_top">← Back</a>
 <a class="pill pill-help" href="#DR_Congo_info">?</a>
 </div>
 <div class="action-right">
@@ -1531,7 +1553,7 @@ footer { text-align:center; padding:20px 16px 32px; font-size:10px; color:rgba(2
 <div class="overlay-box">
 <div class="overlay-title">About This Data</div>
 <div class="overlay-text">Squads are as per the first announced squads - they could change based on injuries or other reasons. Data is sourced from World Soccer, Wikipedia and various internet sites, and should reflect status upto June 1st, 2026</div>
-<a class="overlay-close" href="#DR_Congo_top">Tap to close</a>
+<a class="overlay-close" href="#DR_Congo_top">&#x2715;</a>
 </div>
 </div>
 <div class="content">
@@ -1564,7 +1586,7 @@ footer { text-align:center; padding:20px 16px 32px; font-size:10px; color:rgba(2
 </div>
 <div class="action-bar">
 <div class="action-left">
-<a class="pill pill-back" href="#home_top">← Back</a>
+<a class="pill pill-back" id="back-btn" href="#home_top">← Back</a>
 <a class="pill pill-help" href="#Ecuador_info">?</a>
 </div>
 <div class="action-right">
@@ -1578,7 +1600,7 @@ footer { text-align:center; padding:20px 16px 32px; font-size:10px; color:rgba(2
 <div class="overlay-box">
 <div class="overlay-title">About This Data</div>
 <div class="overlay-text">Squads are as per the first announced squads - they could change based on injuries or other reasons. Data is sourced from World Soccer, Wikipedia and various internet sites, and should reflect status upto June 1st, 2026</div>
-<a class="overlay-close" href="#Ecuador_top">Tap to close</a>
+<a class="overlay-close" href="#Ecuador_top">&#x2715;</a>
 </div>
 </div>
 <div class="content">
@@ -1611,7 +1633,7 @@ footer { text-align:center; padding:20px 16px 32px; font-size:10px; color:rgba(2
 </div>
 <div class="action-bar">
 <div class="action-left">
-<a class="pill pill-back" href="#home_top">← Back</a>
+<a class="pill pill-back" id="back-btn" href="#home_top">← Back</a>
 <a class="pill pill-help" href="#Egypt_info">?</a>
 </div>
 <div class="action-right">
@@ -1625,7 +1647,7 @@ footer { text-align:center; padding:20px 16px 32px; font-size:10px; color:rgba(2
 <div class="overlay-box">
 <div class="overlay-title">About This Data</div>
 <div class="overlay-text">Squads are as per the first announced squads - they could change based on injuries or other reasons. Data is sourced from World Soccer, Wikipedia and various internet sites, and should reflect status upto June 1st, 2026</div>
-<a class="overlay-close" href="#Egypt_top">Tap to close</a>
+<a class="overlay-close" href="#Egypt_top">&#x2715;</a>
 </div>
 </div>
 <div class="content">
@@ -1658,7 +1680,7 @@ footer { text-align:center; padding:20px 16px 32px; font-size:10px; color:rgba(2
 </div>
 <div class="action-bar">
 <div class="action-left">
-<a class="pill pill-back" href="#home_top">← Back</a>
+<a class="pill pill-back" id="back-btn" href="#home_top">← Back</a>
 <a class="pill pill-help" href="#England_info">?</a>
 </div>
 <div class="action-right">
@@ -1672,7 +1694,7 @@ footer { text-align:center; padding:20px 16px 32px; font-size:10px; color:rgba(2
 <div class="overlay-box">
 <div class="overlay-title">About This Data</div>
 <div class="overlay-text">Squads are as per the first announced squads - they could change based on injuries or other reasons. Data is sourced from World Soccer, Wikipedia and various internet sites, and should reflect status upto June 1st, 2026</div>
-<a class="overlay-close" href="#England_top">Tap to close</a>
+<a class="overlay-close" href="#England_top">&#x2715;</a>
 </div>
 </div>
 <div class="content">
@@ -1705,7 +1727,7 @@ footer { text-align:center; padding:20px 16px 32px; font-size:10px; color:rgba(2
 </div>
 <div class="action-bar">
 <div class="action-left">
-<a class="pill pill-back" href="#home_top">← Back</a>
+<a class="pill pill-back" id="back-btn" href="#home_top">← Back</a>
 <a class="pill pill-help" href="#France_info">?</a>
 </div>
 <div class="action-right">
@@ -1719,7 +1741,7 @@ footer { text-align:center; padding:20px 16px 32px; font-size:10px; color:rgba(2
 <div class="overlay-box">
 <div class="overlay-title">About This Data</div>
 <div class="overlay-text">Squads are as per the first announced squads - they could change based on injuries or other reasons. Data is sourced from World Soccer, Wikipedia and various internet sites, and should reflect status upto June 1st, 2026</div>
-<a class="overlay-close" href="#France_top">Tap to close</a>
+<a class="overlay-close" href="#France_top">&#x2715;</a>
 </div>
 </div>
 <div class="content">
@@ -1752,7 +1774,7 @@ footer { text-align:center; padding:20px 16px 32px; font-size:10px; color:rgba(2
 </div>
 <div class="action-bar">
 <div class="action-left">
-<a class="pill pill-back" href="#home_top">← Back</a>
+<a class="pill pill-back" id="back-btn" href="#home_top">← Back</a>
 <a class="pill pill-help" href="#Germany_info">?</a>
 </div>
 <div class="action-right">
@@ -1766,7 +1788,7 @@ footer { text-align:center; padding:20px 16px 32px; font-size:10px; color:rgba(2
 <div class="overlay-box">
 <div class="overlay-title">About This Data</div>
 <div class="overlay-text">Squads are as per the first announced squads - they could change based on injuries or other reasons. Data is sourced from World Soccer, Wikipedia and various internet sites, and should reflect status upto June 1st, 2026</div>
-<a class="overlay-close" href="#Germany_top">Tap to close</a>
+<a class="overlay-close" href="#Germany_top">&#x2715;</a>
 </div>
 </div>
 <div class="content">
@@ -1799,7 +1821,7 @@ footer { text-align:center; padding:20px 16px 32px; font-size:10px; color:rgba(2
 </div>
 <div class="action-bar">
 <div class="action-left">
-<a class="pill pill-back" href="#home_top">← Back</a>
+<a class="pill pill-back" id="back-btn" href="#home_top">← Back</a>
 <a class="pill pill-help" href="#Ghana_info">?</a>
 </div>
 <div class="action-right">
@@ -1813,7 +1835,7 @@ footer { text-align:center; padding:20px 16px 32px; font-size:10px; color:rgba(2
 <div class="overlay-box">
 <div class="overlay-title">About This Data</div>
 <div class="overlay-text">Squads are as per the first announced squads - they could change based on injuries or other reasons. Data is sourced from World Soccer, Wikipedia and various internet sites, and should reflect status upto June 1st, 2026</div>
-<a class="overlay-close" href="#Ghana_top">Tap to close</a>
+<a class="overlay-close" href="#Ghana_top">&#x2715;</a>
 </div>
 </div>
 <div class="content">
@@ -1846,7 +1868,7 @@ footer { text-align:center; padding:20px 16px 32px; font-size:10px; color:rgba(2
 </div>
 <div class="action-bar">
 <div class="action-left">
-<a class="pill pill-back" href="#home_top">← Back</a>
+<a class="pill pill-back" id="back-btn" href="#home_top">← Back</a>
 <a class="pill pill-help" href="#Haiti_info">?</a>
 </div>
 <div class="action-right">
@@ -1860,7 +1882,7 @@ footer { text-align:center; padding:20px 16px 32px; font-size:10px; color:rgba(2
 <div class="overlay-box">
 <div class="overlay-title">About This Data</div>
 <div class="overlay-text">Squads are as per the first announced squads - they could change based on injuries or other reasons. Data is sourced from World Soccer, Wikipedia and various internet sites, and should reflect status upto June 1st, 2026</div>
-<a class="overlay-close" href="#Haiti_top">Tap to close</a>
+<a class="overlay-close" href="#Haiti_top">&#x2715;</a>
 </div>
 </div>
 <div class="content">
@@ -1893,7 +1915,7 @@ footer { text-align:center; padding:20px 16px 32px; font-size:10px; color:rgba(2
 </div>
 <div class="action-bar">
 <div class="action-left">
-<a class="pill pill-back" href="#home_top">← Back</a>
+<a class="pill pill-back" id="back-btn" href="#home_top">← Back</a>
 <a class="pill pill-help" href="#Iran_info">?</a>
 </div>
 <div class="action-right">
@@ -1907,7 +1929,7 @@ footer { text-align:center; padding:20px 16px 32px; font-size:10px; color:rgba(2
 <div class="overlay-box">
 <div class="overlay-title">About This Data</div>
 <div class="overlay-text">Squads are as per the first announced squads - they could change based on injuries or other reasons. Data is sourced from World Soccer, Wikipedia and various internet sites, and should reflect status upto June 1st, 2026</div>
-<a class="overlay-close" href="#Iran_top">Tap to close</a>
+<a class="overlay-close" href="#Iran_top">&#x2715;</a>
 </div>
 </div>
 <div class="content">
@@ -1940,7 +1962,7 @@ footer { text-align:center; padding:20px 16px 32px; font-size:10px; color:rgba(2
 </div>
 <div class="action-bar">
 <div class="action-left">
-<a class="pill pill-back" href="#home_top">← Back</a>
+<a class="pill pill-back" id="back-btn" href="#home_top">← Back</a>
 <a class="pill pill-help" href="#Iraq_info">?</a>
 </div>
 <div class="action-right">
@@ -1954,7 +1976,7 @@ footer { text-align:center; padding:20px 16px 32px; font-size:10px; color:rgba(2
 <div class="overlay-box">
 <div class="overlay-title">About This Data</div>
 <div class="overlay-text">Squads are as per the first announced squads - they could change based on injuries or other reasons. Data is sourced from World Soccer, Wikipedia and various internet sites, and should reflect status upto June 1st, 2026</div>
-<a class="overlay-close" href="#Iraq_top">Tap to close</a>
+<a class="overlay-close" href="#Iraq_top">&#x2715;</a>
 </div>
 </div>
 <div class="content">
@@ -1987,7 +2009,7 @@ footer { text-align:center; padding:20px 16px 32px; font-size:10px; color:rgba(2
 </div>
 <div class="action-bar">
 <div class="action-left">
-<a class="pill pill-back" href="#home_top">← Back</a>
+<a class="pill pill-back" id="back-btn" href="#home_top">← Back</a>
 <a class="pill pill-help" href="#Ivory_Coast_info">?</a>
 </div>
 <div class="action-right">
@@ -2001,7 +2023,7 @@ footer { text-align:center; padding:20px 16px 32px; font-size:10px; color:rgba(2
 <div class="overlay-box">
 <div class="overlay-title">About This Data</div>
 <div class="overlay-text">Squads are as per the first announced squads - they could change based on injuries or other reasons. Data is sourced from World Soccer, Wikipedia and various internet sites, and should reflect status upto June 1st, 2026</div>
-<a class="overlay-close" href="#Ivory_Coast_top">Tap to close</a>
+<a class="overlay-close" href="#Ivory_Coast_top">&#x2715;</a>
 </div>
 </div>
 <div class="content">
@@ -2034,7 +2056,7 @@ footer { text-align:center; padding:20px 16px 32px; font-size:10px; color:rgba(2
 </div>
 <div class="action-bar">
 <div class="action-left">
-<a class="pill pill-back" href="#home_top">← Back</a>
+<a class="pill pill-back" id="back-btn" href="#home_top">← Back</a>
 <a class="pill pill-help" href="#Japan_info">?</a>
 </div>
 <div class="action-right">
@@ -2048,7 +2070,7 @@ footer { text-align:center; padding:20px 16px 32px; font-size:10px; color:rgba(2
 <div class="overlay-box">
 <div class="overlay-title">About This Data</div>
 <div class="overlay-text">Squads are as per the first announced squads - they could change based on injuries or other reasons. Data is sourced from World Soccer, Wikipedia and various internet sites, and should reflect status upto June 1st, 2026</div>
-<a class="overlay-close" href="#Japan_top">Tap to close</a>
+<a class="overlay-close" href="#Japan_top">&#x2715;</a>
 </div>
 </div>
 <div class="content">
@@ -2081,7 +2103,7 @@ footer { text-align:center; padding:20px 16px 32px; font-size:10px; color:rgba(2
 </div>
 <div class="action-bar">
 <div class="action-left">
-<a class="pill pill-back" href="#home_top">← Back</a>
+<a class="pill pill-back" id="back-btn" href="#home_top">← Back</a>
 <a class="pill pill-help" href="#Jordan_info">?</a>
 </div>
 <div class="action-right">
@@ -2095,7 +2117,7 @@ footer { text-align:center; padding:20px 16px 32px; font-size:10px; color:rgba(2
 <div class="overlay-box">
 <div class="overlay-title">About This Data</div>
 <div class="overlay-text">Squads are as per the first announced squads - they could change based on injuries or other reasons. Data is sourced from World Soccer, Wikipedia and various internet sites, and should reflect status upto June 1st, 2026</div>
-<a class="overlay-close" href="#Jordan_top">Tap to close</a>
+<a class="overlay-close" href="#Jordan_top">&#x2715;</a>
 </div>
 </div>
 <div class="content">
@@ -2128,7 +2150,7 @@ footer { text-align:center; padding:20px 16px 32px; font-size:10px; color:rgba(2
 </div>
 <div class="action-bar">
 <div class="action-left">
-<a class="pill pill-back" href="#home_top">← Back</a>
+<a class="pill pill-back" id="back-btn" href="#home_top">← Back</a>
 <a class="pill pill-help" href="#Mexico_info">?</a>
 </div>
 <div class="action-right">
@@ -2142,7 +2164,7 @@ footer { text-align:center; padding:20px 16px 32px; font-size:10px; color:rgba(2
 <div class="overlay-box">
 <div class="overlay-title">About This Data</div>
 <div class="overlay-text">Squads are as per the first announced squads - they could change based on injuries or other reasons. Data is sourced from World Soccer, Wikipedia and various internet sites, and should reflect status upto June 1st, 2026</div>
-<a class="overlay-close" href="#Mexico_top">Tap to close</a>
+<a class="overlay-close" href="#Mexico_top">&#x2715;</a>
 </div>
 </div>
 <div class="content">
@@ -2175,7 +2197,7 @@ footer { text-align:center; padding:20px 16px 32px; font-size:10px; color:rgba(2
 </div>
 <div class="action-bar">
 <div class="action-left">
-<a class="pill pill-back" href="#home_top">← Back</a>
+<a class="pill pill-back" id="back-btn" href="#home_top">← Back</a>
 <a class="pill pill-help" href="#Morocco_info">?</a>
 </div>
 <div class="action-right">
@@ -2189,7 +2211,7 @@ footer { text-align:center; padding:20px 16px 32px; font-size:10px; color:rgba(2
 <div class="overlay-box">
 <div class="overlay-title">About This Data</div>
 <div class="overlay-text">Squads are as per the first announced squads - they could change based on injuries or other reasons. Data is sourced from World Soccer, Wikipedia and various internet sites, and should reflect status upto June 1st, 2026</div>
-<a class="overlay-close" href="#Morocco_top">Tap to close</a>
+<a class="overlay-close" href="#Morocco_top">&#x2715;</a>
 </div>
 </div>
 <div class="content">
@@ -2222,7 +2244,7 @@ footer { text-align:center; padding:20px 16px 32px; font-size:10px; color:rgba(2
 </div>
 <div class="action-bar">
 <div class="action-left">
-<a class="pill pill-back" href="#home_top">← Back</a>
+<a class="pill pill-back" id="back-btn" href="#home_top">← Back</a>
 <a class="pill pill-help" href="#Netherlands_info">?</a>
 </div>
 <div class="action-right">
@@ -2236,7 +2258,7 @@ footer { text-align:center; padding:20px 16px 32px; font-size:10px; color:rgba(2
 <div class="overlay-box">
 <div class="overlay-title">About This Data</div>
 <div class="overlay-text">Squads are as per the first announced squads - they could change based on injuries or other reasons. Data is sourced from World Soccer, Wikipedia and various internet sites, and should reflect status upto June 1st, 2026</div>
-<a class="overlay-close" href="#Netherlands_top">Tap to close</a>
+<a class="overlay-close" href="#Netherlands_top">&#x2715;</a>
 </div>
 </div>
 <div class="content">
@@ -2269,7 +2291,7 @@ footer { text-align:center; padding:20px 16px 32px; font-size:10px; color:rgba(2
 </div>
 <div class="action-bar">
 <div class="action-left">
-<a class="pill pill-back" href="#home_top">← Back</a>
+<a class="pill pill-back" id="back-btn" href="#home_top">← Back</a>
 <a class="pill pill-help" href="#New_Zealand_info">?</a>
 </div>
 <div class="action-right">
@@ -2283,7 +2305,7 @@ footer { text-align:center; padding:20px 16px 32px; font-size:10px; color:rgba(2
 <div class="overlay-box">
 <div class="overlay-title">About This Data</div>
 <div class="overlay-text">Squads are as per the first announced squads - they could change based on injuries or other reasons. Data is sourced from World Soccer, Wikipedia and various internet sites, and should reflect status upto June 1st, 2026</div>
-<a class="overlay-close" href="#New_Zealand_top">Tap to close</a>
+<a class="overlay-close" href="#New_Zealand_top">&#x2715;</a>
 </div>
 </div>
 <div class="content">
@@ -2316,7 +2338,7 @@ footer { text-align:center; padding:20px 16px 32px; font-size:10px; color:rgba(2
 </div>
 <div class="action-bar">
 <div class="action-left">
-<a class="pill pill-back" href="#home_top">← Back</a>
+<a class="pill pill-back" id="back-btn" href="#home_top">← Back</a>
 <a class="pill pill-help" href="#Norway_info">?</a>
 </div>
 <div class="action-right">
@@ -2330,7 +2352,7 @@ footer { text-align:center; padding:20px 16px 32px; font-size:10px; color:rgba(2
 <div class="overlay-box">
 <div class="overlay-title">About This Data</div>
 <div class="overlay-text">Squads are as per the first announced squads - they could change based on injuries or other reasons. Data is sourced from World Soccer, Wikipedia and various internet sites, and should reflect status upto June 1st, 2026</div>
-<a class="overlay-close" href="#Norway_top">Tap to close</a>
+<a class="overlay-close" href="#Norway_top">&#x2715;</a>
 </div>
 </div>
 <div class="content">
@@ -2363,7 +2385,7 @@ footer { text-align:center; padding:20px 16px 32px; font-size:10px; color:rgba(2
 </div>
 <div class="action-bar">
 <div class="action-left">
-<a class="pill pill-back" href="#home_top">← Back</a>
+<a class="pill pill-back" id="back-btn" href="#home_top">← Back</a>
 <a class="pill pill-help" href="#Panama_info">?</a>
 </div>
 <div class="action-right">
@@ -2377,7 +2399,7 @@ footer { text-align:center; padding:20px 16px 32px; font-size:10px; color:rgba(2
 <div class="overlay-box">
 <div class="overlay-title">About This Data</div>
 <div class="overlay-text">Squads are as per the first announced squads - they could change based on injuries or other reasons. Data is sourced from World Soccer, Wikipedia and various internet sites, and should reflect status upto June 1st, 2026</div>
-<a class="overlay-close" href="#Panama_top">Tap to close</a>
+<a class="overlay-close" href="#Panama_top">&#x2715;</a>
 </div>
 </div>
 <div class="content">
@@ -2410,7 +2432,7 @@ footer { text-align:center; padding:20px 16px 32px; font-size:10px; color:rgba(2
 </div>
 <div class="action-bar">
 <div class="action-left">
-<a class="pill pill-back" href="#home_top">← Back</a>
+<a class="pill pill-back" id="back-btn" href="#home_top">← Back</a>
 <a class="pill pill-help" href="#Paraguay_info">?</a>
 </div>
 <div class="action-right">
@@ -2424,7 +2446,7 @@ footer { text-align:center; padding:20px 16px 32px; font-size:10px; color:rgba(2
 <div class="overlay-box">
 <div class="overlay-title">About This Data</div>
 <div class="overlay-text">Squads are as per the first announced squads - they could change based on injuries or other reasons. Data is sourced from World Soccer, Wikipedia and various internet sites, and should reflect status upto June 1st, 2026</div>
-<a class="overlay-close" href="#Paraguay_top">Tap to close</a>
+<a class="overlay-close" href="#Paraguay_top">&#x2715;</a>
 </div>
 </div>
 <div class="content">
@@ -2457,7 +2479,7 @@ footer { text-align:center; padding:20px 16px 32px; font-size:10px; color:rgba(2
 </div>
 <div class="action-bar">
 <div class="action-left">
-<a class="pill pill-back" href="#home_top">← Back</a>
+<a class="pill pill-back" id="back-btn" href="#home_top">← Back</a>
 <a class="pill pill-help" href="#Portugal_info">?</a>
 </div>
 <div class="action-right">
@@ -2471,7 +2493,7 @@ footer { text-align:center; padding:20px 16px 32px; font-size:10px; color:rgba(2
 <div class="overlay-box">
 <div class="overlay-title">About This Data</div>
 <div class="overlay-text">Squads are as per the first announced squads - they could change based on injuries or other reasons. Data is sourced from World Soccer, Wikipedia and various internet sites, and should reflect status upto June 1st, 2026</div>
-<a class="overlay-close" href="#Portugal_top">Tap to close</a>
+<a class="overlay-close" href="#Portugal_top">&#x2715;</a>
 </div>
 </div>
 <div class="content">
@@ -2504,7 +2526,7 @@ footer { text-align:center; padding:20px 16px 32px; font-size:10px; color:rgba(2
 </div>
 <div class="action-bar">
 <div class="action-left">
-<a class="pill pill-back" href="#home_top">← Back</a>
+<a class="pill pill-back" id="back-btn" href="#home_top">← Back</a>
 <a class="pill pill-help" href="#Qatar_info">?</a>
 </div>
 <div class="action-right">
@@ -2518,7 +2540,7 @@ footer { text-align:center; padding:20px 16px 32px; font-size:10px; color:rgba(2
 <div class="overlay-box">
 <div class="overlay-title">About This Data</div>
 <div class="overlay-text">Squads are as per the first announced squads - they could change based on injuries or other reasons. Data is sourced from World Soccer, Wikipedia and various internet sites, and should reflect status upto June 1st, 2026</div>
-<a class="overlay-close" href="#Qatar_top">Tap to close</a>
+<a class="overlay-close" href="#Qatar_top">&#x2715;</a>
 </div>
 </div>
 <div class="content">
@@ -2551,7 +2573,7 @@ footer { text-align:center; padding:20px 16px 32px; font-size:10px; color:rgba(2
 </div>
 <div class="action-bar">
 <div class="action-left">
-<a class="pill pill-back" href="#home_top">← Back</a>
+<a class="pill pill-back" id="back-btn" href="#home_top">← Back</a>
 <a class="pill pill-help" href="#Saudi_Arabia_info">?</a>
 </div>
 <div class="action-right">
@@ -2565,7 +2587,7 @@ footer { text-align:center; padding:20px 16px 32px; font-size:10px; color:rgba(2
 <div class="overlay-box">
 <div class="overlay-title">About This Data</div>
 <div class="overlay-text">Squads are as per the first announced squads - they could change based on injuries or other reasons. Data is sourced from World Soccer, Wikipedia and various internet sites, and should reflect status upto June 1st, 2026</div>
-<a class="overlay-close" href="#Saudi_Arabia_top">Tap to close</a>
+<a class="overlay-close" href="#Saudi_Arabia_top">&#x2715;</a>
 </div>
 </div>
 <div class="content">
@@ -2598,7 +2620,7 @@ footer { text-align:center; padding:20px 16px 32px; font-size:10px; color:rgba(2
 </div>
 <div class="action-bar">
 <div class="action-left">
-<a class="pill pill-back" href="#home_top">← Back</a>
+<a class="pill pill-back" id="back-btn" href="#home_top">← Back</a>
 <a class="pill pill-help" href="#Scotland_info">?</a>
 </div>
 <div class="action-right">
@@ -2612,7 +2634,7 @@ footer { text-align:center; padding:20px 16px 32px; font-size:10px; color:rgba(2
 <div class="overlay-box">
 <div class="overlay-title">About This Data</div>
 <div class="overlay-text">Squads are as per the first announced squads - they could change based on injuries or other reasons. Data is sourced from World Soccer, Wikipedia and various internet sites, and should reflect status upto June 1st, 2026</div>
-<a class="overlay-close" href="#Scotland_top">Tap to close</a>
+<a class="overlay-close" href="#Scotland_top">&#x2715;</a>
 </div>
 </div>
 <div class="content">
@@ -2645,7 +2667,7 @@ footer { text-align:center; padding:20px 16px 32px; font-size:10px; color:rgba(2
 </div>
 <div class="action-bar">
 <div class="action-left">
-<a class="pill pill-back" href="#home_top">← Back</a>
+<a class="pill pill-back" id="back-btn" href="#home_top">← Back</a>
 <a class="pill pill-help" href="#Senegal_info">?</a>
 </div>
 <div class="action-right">
@@ -2659,7 +2681,7 @@ footer { text-align:center; padding:20px 16px 32px; font-size:10px; color:rgba(2
 <div class="overlay-box">
 <div class="overlay-title">About This Data</div>
 <div class="overlay-text">Squads are as per the first announced squads - they could change based on injuries or other reasons. Data is sourced from World Soccer, Wikipedia and various internet sites, and should reflect status upto June 1st, 2026</div>
-<a class="overlay-close" href="#Senegal_top">Tap to close</a>
+<a class="overlay-close" href="#Senegal_top">&#x2715;</a>
 </div>
 </div>
 <div class="content">
@@ -2692,7 +2714,7 @@ footer { text-align:center; padding:20px 16px 32px; font-size:10px; color:rgba(2
 </div>
 <div class="action-bar">
 <div class="action-left">
-<a class="pill pill-back" href="#home_top">← Back</a>
+<a class="pill pill-back" id="back-btn" href="#home_top">← Back</a>
 <a class="pill pill-help" href="#South_Africa_info">?</a>
 </div>
 <div class="action-right">
@@ -2706,7 +2728,7 @@ footer { text-align:center; padding:20px 16px 32px; font-size:10px; color:rgba(2
 <div class="overlay-box">
 <div class="overlay-title">About This Data</div>
 <div class="overlay-text">Squads are as per the first announced squads - they could change based on injuries or other reasons. Data is sourced from World Soccer, Wikipedia and various internet sites, and should reflect status upto June 1st, 2026</div>
-<a class="overlay-close" href="#South_Africa_top">Tap to close</a>
+<a class="overlay-close" href="#South_Africa_top">&#x2715;</a>
 </div>
 </div>
 <div class="content">
@@ -2739,7 +2761,7 @@ footer { text-align:center; padding:20px 16px 32px; font-size:10px; color:rgba(2
 </div>
 <div class="action-bar">
 <div class="action-left">
-<a class="pill pill-back" href="#home_top">← Back</a>
+<a class="pill pill-back" id="back-btn" href="#home_top">← Back</a>
 <a class="pill pill-help" href="#South_Korea_info">?</a>
 </div>
 <div class="action-right">
@@ -2753,7 +2775,7 @@ footer { text-align:center; padding:20px 16px 32px; font-size:10px; color:rgba(2
 <div class="overlay-box">
 <div class="overlay-title">About This Data</div>
 <div class="overlay-text">Squads are as per the first announced squads - they could change based on injuries or other reasons. Data is sourced from World Soccer, Wikipedia and various internet sites, and should reflect status upto June 1st, 2026</div>
-<a class="overlay-close" href="#South_Korea_top">Tap to close</a>
+<a class="overlay-close" href="#South_Korea_top">&#x2715;</a>
 </div>
 </div>
 <div class="content">
@@ -2786,7 +2808,7 @@ footer { text-align:center; padding:20px 16px 32px; font-size:10px; color:rgba(2
 </div>
 <div class="action-bar">
 <div class="action-left">
-<a class="pill pill-back" href="#home_top">← Back</a>
+<a class="pill pill-back" id="back-btn" href="#home_top">← Back</a>
 <a class="pill pill-help" href="#Spain_info">?</a>
 </div>
 <div class="action-right">
@@ -2800,7 +2822,7 @@ footer { text-align:center; padding:20px 16px 32px; font-size:10px; color:rgba(2
 <div class="overlay-box">
 <div class="overlay-title">About This Data</div>
 <div class="overlay-text">Squads are as per the first announced squads - they could change based on injuries or other reasons. Data is sourced from World Soccer, Wikipedia and various internet sites, and should reflect status upto June 1st, 2026</div>
-<a class="overlay-close" href="#Spain_top">Tap to close</a>
+<a class="overlay-close" href="#Spain_top">&#x2715;</a>
 </div>
 </div>
 <div class="content">
@@ -2833,7 +2855,7 @@ footer { text-align:center; padding:20px 16px 32px; font-size:10px; color:rgba(2
 </div>
 <div class="action-bar">
 <div class="action-left">
-<a class="pill pill-back" href="#home_top">← Back</a>
+<a class="pill pill-back" id="back-btn" href="#home_top">← Back</a>
 <a class="pill pill-help" href="#Sweden_info">?</a>
 </div>
 <div class="action-right">
@@ -2847,7 +2869,7 @@ footer { text-align:center; padding:20px 16px 32px; font-size:10px; color:rgba(2
 <div class="overlay-box">
 <div class="overlay-title">About This Data</div>
 <div class="overlay-text">Squads are as per the first announced squads - they could change based on injuries or other reasons. Data is sourced from World Soccer, Wikipedia and various internet sites, and should reflect status upto June 1st, 2026</div>
-<a class="overlay-close" href="#Sweden_top">Tap to close</a>
+<a class="overlay-close" href="#Sweden_top">&#x2715;</a>
 </div>
 </div>
 <div class="content">
@@ -2880,7 +2902,7 @@ footer { text-align:center; padding:20px 16px 32px; font-size:10px; color:rgba(2
 </div>
 <div class="action-bar">
 <div class="action-left">
-<a class="pill pill-back" href="#home_top">← Back</a>
+<a class="pill pill-back" id="back-btn" href="#home_top">← Back</a>
 <a class="pill pill-help" href="#Switzerland_info">?</a>
 </div>
 <div class="action-right">
@@ -2894,7 +2916,7 @@ footer { text-align:center; padding:20px 16px 32px; font-size:10px; color:rgba(2
 <div class="overlay-box">
 <div class="overlay-title">About This Data</div>
 <div class="overlay-text">Squads are as per the first announced squads - they could change based on injuries or other reasons. Data is sourced from World Soccer, Wikipedia and various internet sites, and should reflect status upto June 1st, 2026</div>
-<a class="overlay-close" href="#Switzerland_top">Tap to close</a>
+<a class="overlay-close" href="#Switzerland_top">&#x2715;</a>
 </div>
 </div>
 <div class="content">
@@ -2927,7 +2949,7 @@ footer { text-align:center; padding:20px 16px 32px; font-size:10px; color:rgba(2
 </div>
 <div class="action-bar">
 <div class="action-left">
-<a class="pill pill-back" href="#home_top">← Back</a>
+<a class="pill pill-back" id="back-btn" href="#home_top">← Back</a>
 <a class="pill pill-help" href="#Tunisia_info">?</a>
 </div>
 <div class="action-right">
@@ -2941,7 +2963,7 @@ footer { text-align:center; padding:20px 16px 32px; font-size:10px; color:rgba(2
 <div class="overlay-box">
 <div class="overlay-title">About This Data</div>
 <div class="overlay-text">Squads are as per the first announced squads - they could change based on injuries or other reasons. Data is sourced from World Soccer, Wikipedia and various internet sites, and should reflect status upto June 1st, 2026</div>
-<a class="overlay-close" href="#Tunisia_top">Tap to close</a>
+<a class="overlay-close" href="#Tunisia_top">&#x2715;</a>
 </div>
 </div>
 <div class="content">
@@ -2974,7 +2996,7 @@ footer { text-align:center; padding:20px 16px 32px; font-size:10px; color:rgba(2
 </div>
 <div class="action-bar">
 <div class="action-left">
-<a class="pill pill-back" href="#home_top">← Back</a>
+<a class="pill pill-back" id="back-btn" href="#home_top">← Back</a>
 <a class="pill pill-help" href="#Turkey_info">?</a>
 </div>
 <div class="action-right">
@@ -2988,7 +3010,7 @@ footer { text-align:center; padding:20px 16px 32px; font-size:10px; color:rgba(2
 <div class="overlay-box">
 <div class="overlay-title">About This Data</div>
 <div class="overlay-text">Squads are as per the first announced squads - they could change based on injuries or other reasons. Data is sourced from World Soccer, Wikipedia and various internet sites, and should reflect status upto June 1st, 2026</div>
-<a class="overlay-close" href="#Turkey_top">Tap to close</a>
+<a class="overlay-close" href="#Turkey_top">&#x2715;</a>
 </div>
 </div>
 <div class="content">
@@ -3021,7 +3043,7 @@ footer { text-align:center; padding:20px 16px 32px; font-size:10px; color:rgba(2
 </div>
 <div class="action-bar">
 <div class="action-left">
-<a class="pill pill-back" href="#home_top">← Back</a>
+<a class="pill pill-back" id="back-btn" href="#home_top">← Back</a>
 <a class="pill pill-help" href="#United_States_info">?</a>
 </div>
 <div class="action-right">
@@ -3035,7 +3057,7 @@ footer { text-align:center; padding:20px 16px 32px; font-size:10px; color:rgba(2
 <div class="overlay-box">
 <div class="overlay-title">About This Data</div>
 <div class="overlay-text">Squads are as per the first announced squads - they could change based on injuries or other reasons. Data is sourced from World Soccer, Wikipedia and various internet sites, and should reflect status upto June 1st, 2026</div>
-<a class="overlay-close" href="#United_States_top">Tap to close</a>
+<a class="overlay-close" href="#United_States_top">&#x2715;</a>
 </div>
 </div>
 <div class="content">
@@ -3068,7 +3090,7 @@ footer { text-align:center; padding:20px 16px 32px; font-size:10px; color:rgba(2
 </div>
 <div class="action-bar">
 <div class="action-left">
-<a class="pill pill-back" href="#home_top">← Back</a>
+<a class="pill pill-back" id="back-btn" href="#home_top">← Back</a>
 <a class="pill pill-help" href="#Uruguay_info">?</a>
 </div>
 <div class="action-right">
@@ -3082,7 +3104,7 @@ footer { text-align:center; padding:20px 16px 32px; font-size:10px; color:rgba(2
 <div class="overlay-box">
 <div class="overlay-title">About This Data</div>
 <div class="overlay-text">Squads are as per the first announced squads - they could change based on injuries or other reasons. Data is sourced from World Soccer, Wikipedia and various internet sites, and should reflect status upto June 1st, 2026</div>
-<a class="overlay-close" href="#Uruguay_top">Tap to close</a>
+<a class="overlay-close" href="#Uruguay_top">&#x2715;</a>
 </div>
 </div>
 <div class="content">
@@ -3115,7 +3137,7 @@ footer { text-align:center; padding:20px 16px 32px; font-size:10px; color:rgba(2
 </div>
 <div class="action-bar">
 <div class="action-left">
-<a class="pill pill-back" href="#home_top">← Back</a>
+<a class="pill pill-back" id="back-btn" href="#home_top">← Back</a>
 <a class="pill pill-help" href="#Uzbekistan_info">?</a>
 </div>
 <div class="action-right">
@@ -3129,7 +3151,7 @@ footer { text-align:center; padding:20px 16px 32px; font-size:10px; color:rgba(2
 <div class="overlay-box">
 <div class="overlay-title">About This Data</div>
 <div class="overlay-text">Squads are as per the first announced squads - they could change based on injuries or other reasons. Data is sourced from World Soccer, Wikipedia and various internet sites, and should reflect status upto June 1st, 2026</div>
-<a class="overlay-close" href="#Uzbekistan_top">Tap to close</a>
+<a class="overlay-close" href="#Uzbekistan_top">&#x2715;</a>
 </div>
 </div>
 <div class="content">
@@ -3141,7 +3163,21 @@ footer { text-align:center; padding:20px 16px 32px; font-size:10px; color:rgba(2
 window.addEventListener('load', function() {
   window.scrollTo(0, 0);
 });
-window.addEventListener('hashchange', function() {
+window.addEventListener('hashchange', function(e) {
+  var oldHash = e.oldURL.split('#')[1] || '';
+  var newHash = e.newURL.split('#')[1] || '';
+  // Track which home view we came from
+  if (oldHash === 'home_grp') {
+    sessionStorage.setItem('homeView', 'grp');
+  } else if (oldHash === 'home_top' || oldHash === 'home_az' || oldHash === '') {
+    sessionStorage.setItem('homeView', 'az');
+  }
+  // Update back buttons
+  var view = sessionStorage.getItem('homeView') === 'grp' ? '#home_grp' : '#home_top';
+  document.querySelectorAll('#back-btn').forEach(function(btn) {
+    btn.href = view;
+  });
+  // Always scroll to top on navigation
   window.scrollTo(0, 0);
 });
 </script>
